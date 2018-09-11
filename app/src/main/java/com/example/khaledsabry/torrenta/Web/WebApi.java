@@ -14,6 +14,17 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class WebApi {
+    //Singleton Pattern
+    private static WebApi ourInstance;
+
+    public static WebApi getInstance() {
+        if (ourInstance == null)
+            ourInstance = new WebApi();
+        return ourInstance;
+    }
+
+    private WebApi() {
+    }
 
 
     /**
