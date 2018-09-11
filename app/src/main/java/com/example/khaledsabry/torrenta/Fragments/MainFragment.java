@@ -52,31 +52,31 @@ public class MainFragment extends Fragment {
 
                 switch (id) {
                     //todo all fragment
-                    case 23:
+                    case R.id.all_id:
                         MainActivity.loadFragmentNoReturn(R.id.main_farme, null);
                         break;
                     //todo Movie fragment
-                    case 22:
+                    case R.id.movie_id:
                         MainActivity.loadFragmentNoReturn(R.id.main_farme, null);
                         break;
                     //todo TvSeries fragment
-                    case 24:
+                    case R.id.tv_id:
                         MainActivity.loadFragmentNoReturn(R.id.main_farme, null);
                         break;
                     //todo Games fragment
-                    case 25:
+                    case R.id.games_id:
                         MainActivity.loadFragmentNoReturn(R.id.main_farme, null);
                         break;
                     //todo Software fragment
-                    case 2634:
+                    case R.id.software_id:
                         MainActivity.loadFragmentNoReturn(R.id.main_farme, null);
                         break;
                     //todo DATABASE fragment
-                    case 253:
+                    case R.id.download_id:
                         MainActivity.loadFragmentNoReturn(R.id.main_farme, null);
                         break;
                     //todo ABOUTME fragment
-                    case 3426:
+                    case R.id.about_me_id:
                         MainActivity.loadFragmentNoReturn(R.id.main_farme, null);
                         break;
 
