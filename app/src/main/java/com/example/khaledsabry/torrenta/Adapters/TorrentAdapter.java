@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
+import com.example.khaledsabry.torrenta.Inteface.OnSuccess;
 import com.example.khaledsabry.torrenta.MainActivity;
 import com.example.khaledsabry.torrenta.R;
 import com.example.khaledsabry.torrenta.items.Torrent;
@@ -30,14 +31,18 @@ import java.util.List;
 
 public class TorrentAdapter extends RecyclerView.Adapter<TorrentAdapter.TorrentViewHolder> {
     ArrayList<Torrent> torrents = new ArrayList<>();
+    OnSuccess.name listener = new OnSuccess.name() {
+        @Override
+        public void onSuccess(String name) {
+
+        }
+    };
 
 
-    public TorrentAdapter(ArrayList<Torrent> torrents) {
-        this.torrents = torrents;
+    public void setListener(OnSuccess.name listener) {
+        this.listener = listener;
     }
 
-    public TorrentAdapter() {
-    }
 
     public void setTorrents(ArrayList<Torrent> torrents) {
         this.torrents = torrents;
@@ -98,9 +103,9 @@ public class TorrentAdapter extends RecyclerView.Adapter<TorrentAdapter.TorrentV
                 @Override
                 public void onClick(View v) {
                     String magnet = torrent.getMagnet();
+                    String name = title.getText().toString();
 
-
-                    readyAndDownload(magnet);
+                    readyAndDownload(magnet, name);
                 }
             });
         }
@@ -110,13 +115,13 @@ public class TorrentAdapter extends RecyclerView.Adapter<TorrentAdapter.TorrentV
          *
          * @param magnet the magnet link for the torrent file
          */
-        void readyAndDownload(String magnet) {
+        void readyAndDownload(String magnet, String name) {
 
             Intent i = new Intent(Intent.ACTION_VIEW);
             i.addCategory(Intent.CATEGORY_DEFAULT);
             i.setType("application/x-bittorrent");
             i.setData(Uri.parse(magnet));
-            Intent intent = generateTorrentIntent(MainActivity.getActivity().getApplicationContext(), i);
+            Intent intent = generateTorrentIntent(MainActivity.getActivity().getApplicationContext(), i, name);
 
             MainActivity.getActivity().startActivity(Intent.createChooser(intent, "send to"));
         }
@@ -128,7 +133,7 @@ public class TorrentAdapter extends RecyclerView.Adapter<TorrentAdapter.TorrentV
          * @param intent  the intent that specify which app we look for and send with it the data
          * @return an intent to call it with founded apps
          */
-        public Intent generateTorrentIntent(Context context, Intent intent) {
+        public Intent generateTorrentIntent(Context context, Intent intent, String name) {
             final PackageManager packageManager = context.getPackageManager();
             List<ResolveInfo> resolveInfo = packageManager.queryIntentActivities(intent,
                     PackageManager.MATCH_DEFAULT_ONLY);
@@ -146,7 +151,7 @@ public class TorrentAdapter extends RecyclerView.Adapter<TorrentAdapter.TorrentV
                 if (targetedShareIntents.size() > 0) {
                     Intent chooserIntent = Intent.createChooser(targetedShareIntents.remove(0),
                             "Select app to download");
-
+                    listener.onSuccess(name);
                     chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS,
                             targetedShareIntents.toArray(new Parcelable[]{}));
 
