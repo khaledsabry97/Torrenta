@@ -25,14 +25,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by KhALeD SaBrY on 15-Jul-18.
+ * Created by KhALeD SaBrY on 12-Sep-18.
  */
 
 public class TorrentAdapter extends RecyclerView.Adapter<TorrentAdapter.TorrentViewHolder> {
     ArrayList<Torrent> torrents = new ArrayList<>();
 
+
     public TorrentAdapter(ArrayList<Torrent> torrents) {
         this.torrents = torrents;
+    }
+
+    public TorrentAdapter() {
+    }
+
+    public void setTorrents(ArrayList<Torrent> torrents) {
+        this.torrents = torrents;
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -52,6 +61,8 @@ public class TorrentAdapter extends RecyclerView.Adapter<TorrentAdapter.TorrentV
 
     @Override
     public int getItemCount() {
+        if (torrents == null)
+            return 0;
         return torrents.size();
     }
 
@@ -87,29 +98,36 @@ public class TorrentAdapter extends RecyclerView.Adapter<TorrentAdapter.TorrentV
                 @Override
                 public void onClick(View v) {
                     String magnet = torrent.getMagnet();
-/*
-                    Intent intent = new Intent(Intent.ACTION_VIEW);
-                    intent.setDataAndType(Uri.parse(magnet), "application/x-bittorrent");
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-                    MainActivity.getActivity().startActivity(intent);*/
 
-                    //     Intent intent = new Intent(Intent.ACTION_ALL_APPS);
-                    //   intent.setData(Uri.parse(magnet));
-                    //      MainActivity.getActivity().startActivity(intent);
 
-                    Intent i = new Intent(Intent.ACTION_VIEW);
-                    i.addCategory(Intent.CATEGORY_DEFAULT);
-                    i.setType("application/x-bittorrent");
-                    i.setData(Uri.parse(torrent.getMagnet()));
-                    Intent intent = generateTorrentIntent(MainActivity.getActivity().getApplicationContext(), i);
-
-                    MainActivity.getActivity().startActivity(Intent.createChooser(intent, "send to"));
-
+                    readyAndDownload(magnet);
                 }
             });
         }
 
+        /**
+         * set the data to be sent and send it
+         *
+         * @param magnet the magnet link for the torrent file
+         */
+        void readyAndDownload(String magnet) {
 
+            Intent i = new Intent(Intent.ACTION_VIEW);
+            i.addCategory(Intent.CATEGORY_DEFAULT);
+            i.setType("application/x-bittorrent");
+            i.setData(Uri.parse(magnet));
+            Intent intent = generateTorrentIntent(MainActivity.getActivity().getApplicationContext(), i);
+
+            MainActivity.getActivity().startActivity(Intent.createChooser(intent, "send to"));
+        }
+
+        /**
+         * search for the apps that downloads the torrent magnet
+         *
+         * @param context the context of the app
+         * @param intent  the intent that specify which app we look for and send with it the data
+         * @return an intent to call it with founded apps
+         */
         public Intent generateTorrentIntent(Context context, Intent intent) {
             final PackageManager packageManager = context.getPackageManager();
             List<ResolveInfo> resolveInfo = packageManager.queryIntentActivities(intent,

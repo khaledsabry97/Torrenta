@@ -5,29 +5,32 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Fragments.MainFragment">
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
 
    <android.support.v4.widget.DrawerLayout
        android:layout_width="match_parent"
        android:layout_height="match_parent"
        android:id="@+id/drawer_layout_id">
 
-       <android.support.v7.widget.Toolbar
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"></android.support.v7.widget.Toolbar>
        <FrameLayout
            android:layout_width="match_parent"
            android:layout_height="match_parent"
-           android:id="@+id/main_farme"
+           android:id="@+id/main_frame"
            ></FrameLayout>
 
 <android.support.design.widget.NavigationView
     android:id="@+id/navigation_view_id"
     android:layout_width="wrap_content"
     android:layout_height="match_parent"
+    android:layout_gravity="start"
 
-    app:menu="@id/main_farme"></android.support.design.widget.NavigationView>
+    app:menu="@menu/main_navigation_menu"></android.support.design.widget.NavigationView>
 
 
    </android.support.v4.widget.DrawerLayout>
+</RelativeLayout>
 
 </FrameLayout>

@@ -53,31 +53,31 @@ public class MainFragment extends Fragment {
                 switch (id) {
                     //todo all fragment
                     case R.id.all_id:
-                        MainActivity.loadFragmentNoReturn(R.id.main_farme, null);
+                        MainActivity.loadFragmentNoReturn(R.id.main_frame, MainSearchFragment.newInstance());
                         break;
                     //todo Movie fragment
                     case R.id.movie_id:
-                        MainActivity.loadFragmentNoReturn(R.id.main_farme, null);
+                        MainActivity.loadFragmentNoReturn(R.id.main_frame, null);
                         break;
                     //todo TvSeries fragment
                     case R.id.tv_id:
-                        MainActivity.loadFragmentNoReturn(R.id.main_farme, null);
+                        MainActivity.loadFragmentNoReturn(R.id.main_frame, null);
                         break;
                     //todo Games fragment
                     case R.id.games_id:
-                        MainActivity.loadFragmentNoReturn(R.id.main_farme, null);
+                        MainActivity.loadFragmentNoReturn(R.id.main_frame, null);
                         break;
                     //todo Software fragment
                     case R.id.software_id:
-                        MainActivity.loadFragmentNoReturn(R.id.main_farme, null);
+                        MainActivity.loadFragmentNoReturn(R.id.main_frame, null);
                         break;
                     //todo DATABASE fragment
                     case R.id.download_id:
-                        MainActivity.loadFragmentNoReturn(R.id.main_farme, null);
+                        MainActivity.loadFragmentNoReturn(R.id.main_frame, null);
                         break;
                     //todo ABOUTME fragment
                     case R.id.about_me_id:
-                        MainActivity.loadFragmentNoReturn(R.id.main_farme, null);
+                        MainActivity.loadFragmentNoReturn(R.id.main_frame, null);
                         break;
 
                 }
