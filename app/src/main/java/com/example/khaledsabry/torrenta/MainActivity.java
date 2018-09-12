@@ -20,6 +20,8 @@ public class MainActivity extends AppCompatActivity {
         mainActivity = this;
     }
 
+    public MainFragment mainFragment = MainFragment.newInstance();
+
     //reference to the main activity
     public static MainActivity getActivity() {
         return mainActivity;
@@ -30,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        loadFragmentWithReturn(R.id.main_container, MainFragment.newInstance());
+        loadFragmentWithReturn(R.id.main_container, mainFragment);
 
     }
 

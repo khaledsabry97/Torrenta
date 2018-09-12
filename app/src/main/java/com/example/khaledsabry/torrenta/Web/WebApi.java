@@ -2,7 +2,7 @@ package com.example.khaledsabry.torrenta.Web;
 
 import android.os.AsyncTask;
 
-import com.example.khaledsabry.torrenta.Inteface.OnWebSuccess;
+import com.example.khaledsabry.torrenta.Interface.OnWebSuccess;
 import com.example.khaledsabry.torrenta.items.Torrent;
 
 import org.jsoup.Jsoup;

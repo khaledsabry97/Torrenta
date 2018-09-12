@@ -27,7 +27,7 @@ public class DatabaseController {
     //quoutes that is used to let the query function correctly
     String quoute = "\"";
 
-
+protected DatabaseTables.History history = new DatabaseTables.History();
     private LiteDatabaseHelper databaseHelper = new LiteDatabaseHelper();
 
 
@@ -52,12 +52,17 @@ public class DatabaseController {
     }
 */
     //get insert controller for local database
-    public InsertController localInsertController() {
+    public InsertController InsertController() {
         return new InsertController();
     }
 
+    //get select controller for local database
+    public SelectController SelectController() {
+        return new SelectController();
+    }
+
     //get delete controller for local database
-    public DeleteController localDeleteController() {
+    public DeleteController DeleteController() {
         return new DeleteController();
     }
 
@@ -200,13 +205,11 @@ public class DatabaseController {
 
 
     protected SQLiteDatabase getWritableDatabase() {
-        databaseHelper = new LiteDatabaseHelper();
         SQLiteDatabase db = databaseHelper.getWritableDatabase();
         return db;
     }
 
     protected SQLiteDatabase getReadableDatabase() {
-        databaseHelper = new LiteDatabaseHelper();
         SQLiteDatabase db = databaseHelper.getReadableDatabase();
         return db;
     }

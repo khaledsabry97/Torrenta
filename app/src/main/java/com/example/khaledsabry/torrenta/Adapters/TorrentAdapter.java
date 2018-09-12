@@ -17,7 +17,8 @@ import android.widget.TextView;
 
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
-import com.example.khaledsabry.torrenta.Inteface.OnSuccess;
+import com.example.khaledsabry.torrenta.Controllers.HistoryController;
+import com.example.khaledsabry.torrenta.Interface.OnSuccess;
 import com.example.khaledsabry.torrenta.MainActivity;
 import com.example.khaledsabry.torrenta.R;
 import com.example.khaledsabry.torrenta.items.Torrent;
@@ -31,17 +32,8 @@ import java.util.List;
 
 public class TorrentAdapter extends RecyclerView.Adapter<TorrentAdapter.TorrentViewHolder> {
     ArrayList<Torrent> torrents = new ArrayList<>();
-    OnSuccess.name listener = new OnSuccess.name() {
-        @Override
-        public void onSuccess(String name) {
+    HistoryController historyController = new HistoryController();
 
-        }
-    };
-
-
-    public void setListener(OnSuccess.name listener) {
-        this.listener = listener;
-    }
 
 
     public void setTorrents(ArrayList<Torrent> torrents) {
@@ -71,7 +63,7 @@ public class TorrentAdapter extends RecyclerView.Adapter<TorrentAdapter.TorrentV
         return torrents.size();
     }
 
-    class TorrentViewHolder extends RecyclerView.ViewHolder {
+    class TorrentViewHolder extends RecyclerView.ViewHolder implements OnSuccess.bool {
         Button downloadImage;
         TextView title;
         TextView seeders;
@@ -79,6 +71,8 @@ public class TorrentAdapter extends RecyclerView.Adapter<TorrentAdapter.TorrentV
         TextView size;
         TextView date;
         CardView cardView;
+
+        String name, sizes;
 
         public TorrentViewHolder(View itemView) {
             super(itemView);
@@ -103,9 +97,9 @@ public class TorrentAdapter extends RecyclerView.Adapter<TorrentAdapter.TorrentV
                 @Override
                 public void onClick(View v) {
                     String magnet = torrent.getMagnet();
-                    String name = title.getText().toString();
-
-                    readyAndDownload(magnet, name);
+                    name = title.getText().toString();
+                    sizes = size.getText().toString();
+                    readyAndDownload(magnet);
                 }
             });
         }
@@ -115,7 +109,7 @@ public class TorrentAdapter extends RecyclerView.Adapter<TorrentAdapter.TorrentV
          *
          * @param magnet the magnet link for the torrent file
          */
-        void readyAndDownload(String magnet, String name) {
+        void readyAndDownload(String magnet) {
 
             Intent i = new Intent(Intent.ACTION_VIEW);
             i.addCategory(Intent.CATEGORY_DEFAULT);
@@ -151,7 +145,8 @@ public class TorrentAdapter extends RecyclerView.Adapter<TorrentAdapter.TorrentV
                 if (targetedShareIntents.size() > 0) {
                     Intent chooserIntent = Intent.createChooser(targetedShareIntents.remove(0),
                             "Select app to download");
-                    listener.onSuccess(name);
+
+                    addToHistory(name,sizes);
                     chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS,
                             targetedShareIntents.toArray(new Parcelable[]{}));
 
@@ -159,6 +154,32 @@ public class TorrentAdapter extends RecyclerView.Adapter<TorrentAdapter.TorrentV
                 }
             }
             return null;
+        }
+
+
+        void addToHistory(String name, String size) {
+            switch (MainActivity.getActivity().mainFragment.type) {
+                case 0:
+                    historyController.addAllToHistory(name, sizes, this);
+                    break;
+                case 1:
+                    historyController.addMovieToHistory(name, sizes, this);
+                    break;
+                case 2:
+                    historyController.addTvToHistory(name, sizes, this);
+                    break;
+                case 3:
+                    historyController.addGamesToHistory(name, sizes, this);
+                    break;
+                case 4:
+                    historyController.addSoftwareToHistory(name, sizes, this);
+                    break;
+            }
+        }
+
+        @Override
+        public void onSuccess(boolean state) {
+
         }
     }
 }

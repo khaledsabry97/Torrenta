@@ -11,12 +11,26 @@ public class LiteDatabaseHelper extends SQLiteOpenHelper {
 
     public static final String databaseName = "Torrenta.db";
     public static final int databaseVersion = 1;
+    DatabaseTables.History history = new DatabaseTables.History();
+
+
+    //quoutes that is used to let the query function correctly
+    static String quote = "\"";
+    public final String createDataBaseSql = "CREATE TABLE "+ history.tableName+"(\n" +
+            history.id+" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,\n" +
+            history.name+" TEXT,\n" +
+            history.type+" integer,\n" +
+            history.date+" TEXT NOT NULL\n" +
+            ");";
+
+    public  final String deleteDataBaseSql = "Drop Table " + history.tableName + " ; \n";
+
 
     @Override
     public void onCreate(SQLiteDatabase db) {
 
         //pass create the tables
-        db.execSQL(DatabaseTables.createDataBaseSql);
+        db.execSQL(createDataBaseSql);
 
     }
 
@@ -29,7 +43,7 @@ public class LiteDatabaseHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
         //pass drop the tables
-        db.execSQL(DatabaseTables.deleteDataBaseSql);
+        db.execSQL(createDataBaseSql);
         onCreate(db);
     }
 

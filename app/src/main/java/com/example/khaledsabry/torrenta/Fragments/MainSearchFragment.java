@@ -29,8 +29,11 @@ public class MainSearchFragment extends Fragment {
     Toolbar toolbar;
     SearchView searchView;
     TorrentFragment torrentFragment;
-    public static MainSearchFragment newInstance() {
+
+    static type type;
+    public static MainSearchFragment newInstance(type type) {
         MainSearchFragment fragment = new MainSearchFragment();
+        fragment.type = type;
         return fragment;
     }
 
@@ -44,9 +47,22 @@ public class MainSearchFragment extends Fragment {
         torrentFragment = TorrentFragment.newInstance();
        MainActivity.getActivity().setSupportActionBar(toolbar);
 
+       determineType();
         MainActivity.loadFragmentNoReturn(R.id.torrent_search_items_id,torrentFragment);
 
         return view;
+    }
+
+    private void determineType() {
+        switch (type)
+        {
+            case movie:
+                //todo : load movie navigation fragment
+                break;
+            case tv:
+                //todo: load tv navigation fragment
+                break;
+        }
     }
 
 
@@ -82,5 +98,13 @@ public class MainSearchFragment extends Fragment {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         return true;
+    }
+
+
+    public static enum type
+    {
+        movie,
+        tv,
+        other
     }
 }

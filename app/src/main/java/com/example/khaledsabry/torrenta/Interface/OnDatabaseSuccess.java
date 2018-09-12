@@ -1,4 +1,4 @@
-package com.example.khaledsabry.torrenta.Inteface;
+package com.example.khaledsabry.torrenta.Interface;
 
 import org.json.JSONObject;
 

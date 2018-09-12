@@ -1,5 +1,7 @@
-package com.example.khaledsabry.torrenta.Inteface;
+package com.example.khaledsabry.torrenta.Interface;
 
+
+import com.example.khaledsabry.torrenta.items.HistoryItem;
 
 import org.json.JSONObject;
 
@@ -42,5 +44,10 @@ public interface OnSuccess {
     interface name
     {
         void onSuccess(String name);
+    }
+
+    interface array
+    {
+        void onSuccess(ArrayList<java.lang.Object> historyItems);
     }
 }

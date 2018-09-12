@@ -10,8 +10,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.khaledsabry.torrenta.Adapters.TorrentAdapter;
+import com.example.khaledsabry.torrenta.Controllers.HistoryController;
 import com.example.khaledsabry.torrenta.Controllers.TorrentController;
-import com.example.khaledsabry.torrenta.Inteface.OnWebSuccess;
+import com.example.khaledsabry.torrenta.Interface.OnSuccess;
+import com.example.khaledsabry.torrenta.Interface.OnWebSuccess;
+import com.example.khaledsabry.torrenta.MainActivity;
 import com.example.khaledsabry.torrenta.R;
 import com.example.khaledsabry.torrenta.items.Torrent;
 
@@ -22,13 +25,13 @@ import java.util.ArrayList;
  * Created by KhALeD SaBrY on 12-Sep-18.
  */
 
-public class TorrentFragment extends Fragment {
+public class TorrentFragment extends Fragment implements OnSuccess.bool {
 
     RecyclerView recyclerView;
-    static String searchName;
 
     TorrentController torrentController;
     TorrentAdapter torrentAdapter;
+    HistoryController historyController;
 
     public static TorrentFragment newInstance() {
         TorrentFragment fragment = new TorrentFragment();
@@ -41,7 +44,7 @@ public class TorrentFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_torrent_recycler, container, false);
         recyclerView = view.findViewById(R.id.recycler_id);
-
+historyController = new HistoryController();
         torrentController = new TorrentController();
         setupRecyclerView();
 
@@ -68,11 +71,13 @@ public class TorrentFragment extends Fragment {
                 public void onSuccess(ArrayList<Torrent> torrents) {
                     torrentAdapter.setTorrents(torrents);
 
-                }
-            });
-
+                }});
 
     }
 
 
+    @Override
+    public void onSuccess(boolean state) {
+
+    }
 }
