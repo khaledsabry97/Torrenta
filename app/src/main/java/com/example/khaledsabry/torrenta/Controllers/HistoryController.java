@@ -66,7 +66,7 @@ private OnSuccess.bool listener = new OnSuccess.bool() {
         AsyncTask.execute(new Runnable() {
             @Override
             public void run() {
-          ArrayList<JSONObject> jsonObjects =      databaseController.SelectController().getAllHistory();
+          ArrayList<JSONObject> jsonObjects =      databaseController.selectController().getAllHistory();
                 final ArrayList<HistoryItem> historyItems =setJsonsToHistoryItem(jsonObjects);
                 MainActivity.getActivity().runOnUiThread(new Runnable() {
                     @Override

@@ -4,7 +4,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.example.khaledsabry.torrenta.Database.DatabaseTables;
-import com.example.khaledsabry.torrenta.Database.LiteDatabaseHelper;
+import com.example.khaledsabry.torrenta.Database.DatabaseHelper;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -28,7 +28,7 @@ public class DatabaseController {
     String quoute = "\"";
 
 protected DatabaseTables.History history = new DatabaseTables.History();
-    private LiteDatabaseHelper databaseHelper = new LiteDatabaseHelper();
+    private DatabaseHelper databaseHelper = new DatabaseHelper();
 
 
     //get a insert controller variable
@@ -36,11 +36,6 @@ protected DatabaseTables.History history = new DatabaseTables.History();
         return new InsertController();
     }
 
-    //get a select controller variable
-   /* public SelectController selectController() {
-        return new SelectController();
-    }
-*/
     //get a delete controller variable
     public DeleteController deleteController() {
         return new DeleteController();
@@ -51,13 +46,9 @@ protected DatabaseTables.History history = new DatabaseTables.History();
         return new UpdateController();
     }
 */
-    //get insert controller for local database
-    public InsertController InsertController() {
-        return new InsertController();
-    }
 
     //get select controller for local database
-    public SelectController SelectController() {
+    public SelectController selectController() {
         return new SelectController();
     }
 

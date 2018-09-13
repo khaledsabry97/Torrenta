@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import com.example.khaledsabry.torrenta.MainActivity;
 
 
-public class LiteDatabaseHelper extends SQLiteOpenHelper {
+public class DatabaseHelper extends SQLiteOpenHelper {
 
     public static final String databaseName = "Torrenta.db";
     public static final int databaseVersion = 1;
@@ -19,6 +19,7 @@ public class LiteDatabaseHelper extends SQLiteOpenHelper {
     public final String createDataBaseSql = "CREATE TABLE "+ history.tableName+"(\n" +
             history.id+" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,\n" +
             history.name+" TEXT,\n" +
+            history.size +" TEXT, \n"+
             history.type+" integer,\n" +
             history.date+" TEXT NOT NULL\n" +
             ");";
@@ -34,7 +35,7 @@ public class LiteDatabaseHelper extends SQLiteOpenHelper {
 
     }
 
-    public LiteDatabaseHelper()
+    public DatabaseHelper()
     {
         super(MainActivity.getActivity(),databaseName,null, databaseVersion);
     }

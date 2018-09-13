@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Parcelable;
 import android.support.annotation.NonNull;
@@ -12,8 +13,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
@@ -44,10 +46,12 @@ public class TorrentAdapter extends RecyclerView.Adapter<TorrentAdapter.TorrentV
     @NonNull
     @Override
     public TorrentViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cardview_torrent, parent, false);
+        View view;
+         view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cardview_torrent, parent, false);
 
         return new TorrentViewHolder(view);
     }
+
 
     @Override
     public void onBindViewHolder(@NonNull TorrentViewHolder holder, int position) {
@@ -64,7 +68,7 @@ public class TorrentAdapter extends RecyclerView.Adapter<TorrentAdapter.TorrentV
     }
 
     class TorrentViewHolder extends RecyclerView.ViewHolder implements OnSuccess.bool {
-        Button downloadImage;
+        ImageView downloadImage;
         TextView title;
         TextView seeders;
         TextView leechers;
@@ -115,7 +119,7 @@ public class TorrentAdapter extends RecyclerView.Adapter<TorrentAdapter.TorrentV
             i.addCategory(Intent.CATEGORY_DEFAULT);
             i.setType("application/x-bittorrent");
             i.setData(Uri.parse(magnet));
-            Intent intent = generateTorrentIntent(MainActivity.getActivity().getApplicationContext(), i, name);
+            Intent intent = generateTorrentIntent(MainActivity.getActivity().getApplicationContext(), i);
 
             MainActivity.getActivity().startActivity(Intent.createChooser(intent, "send to"));
         }
@@ -127,7 +131,7 @@ public class TorrentAdapter extends RecyclerView.Adapter<TorrentAdapter.TorrentV
          * @param intent  the intent that specify which app we look for and send with it the data
          * @return an intent to call it with founded apps
          */
-        public Intent generateTorrentIntent(Context context, Intent intent, String name) {
+        public Intent generateTorrentIntent(Context context, Intent intent) {
             final PackageManager packageManager = context.getPackageManager();
             List<ResolveInfo> resolveInfo = packageManager.queryIntentActivities(intent,
                     PackageManager.MATCH_DEFAULT_ONLY);
@@ -146,7 +150,7 @@ public class TorrentAdapter extends RecyclerView.Adapter<TorrentAdapter.TorrentV
                     Intent chooserIntent = Intent.createChooser(targetedShareIntents.remove(0),
                             "Select app to download");
 
-                    addToHistory(name,sizes);
+                    addToHistory();
                     chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS,
                             targetedShareIntents.toArray(new Parcelable[]{}));
 
@@ -157,7 +161,7 @@ public class TorrentAdapter extends RecyclerView.Adapter<TorrentAdapter.TorrentV
         }
 
 
-        void addToHistory(String name, String size) {
+        void addToHistory() {
             switch (MainActivity.getActivity().mainFragment.type) {
                 case 0:
                     historyController.addAllToHistory(name, sizes, this);

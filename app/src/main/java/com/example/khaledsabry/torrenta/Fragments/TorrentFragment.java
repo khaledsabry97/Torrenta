@@ -18,6 +18,7 @@ import com.example.khaledsabry.torrenta.MainActivity;
 import com.example.khaledsabry.torrenta.R;
 import com.example.khaledsabry.torrenta.items.Torrent;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 
@@ -33,6 +34,27 @@ public class TorrentFragment extends Fragment implements OnSuccess.bool {
     TorrentAdapter torrentAdapter;
     HistoryController historyController;
 
+
+ArrayList<Torrent> torrents;
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putSerializable("time_data", (Serializable) torrents);
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+
+
+        if (savedInstanceState != null) {
+            // restore value of members from saved state
+            torrents = (ArrayList<Torrent>) savedInstanceState.getSerializable("time_data");
+        }
+
+
+    }
     public static TorrentFragment newInstance() {
         TorrentFragment fragment = new TorrentFragment();
         return fragment;
@@ -60,6 +82,7 @@ historyController = new HistoryController();
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         linearLayoutManager.setSmoothScrollbarEnabled(true);
         recyclerView.setLayoutManager(linearLayoutManager);
+        torrentAdapter.setTorrents(torrents);
 
     }
 
@@ -68,8 +91,10 @@ historyController = new HistoryController();
 
             torrentController.downloadSkyTorrent(searchName, new OnWebSuccess.OnTorrentSearch() {
                 @Override
-                public void onSuccess(ArrayList<Torrent> torrents) {
-                    torrentAdapter.setTorrents(torrents);
+                public void onSuccess(ArrayList<Torrent> torrent) {
+
+                    torrents = torrent;
+                    torrentAdapter.setTorrents(torrent);
 
                 }});
 

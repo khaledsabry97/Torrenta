@@ -1,8 +1,8 @@
 package com.example.khaledsabry.torrenta;
 
+import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 
 import com.example.khaledsabry.torrenta.Fragments.MainFragment;
@@ -32,7 +32,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        loadFragmentWithReturn(R.id.main_container, mainFragment);
+        if (savedInstanceState != null)
+        {
+            if (!savedInstanceState.getBoolean("opened"))
+                loadFragmentWithReturn(R.id.main_container, mainFragment);
+    }
+    else
+            loadFragmentWithReturn(R.id.main_container, mainFragment);
 
     }
 
@@ -101,5 +107,11 @@ public class MainActivity extends AppCompatActivity {
         }, 1000, 2000);
     }
 
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putBoolean("opened", true);
+    }
 
 }
