@@ -14,7 +14,7 @@
         android:background="@drawable/blue">
 
         <TextView
-            android:id="@+id/title"
+            android:id="@+id/title_id"
             style="@style/TextCategoryNonUniformNoLines"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -23,12 +23,12 @@
             tools:text="avegners infinity war 1080p"
 
             android:textAlignment="textStart"
-            app:layout_constraintEnd_toStartOf="@id/history_id"
+            app:layout_constraintEnd_toStartOf="@id/size"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/date"
+            android:id="@+id/date_id"
             style="@style/TextNormalLine"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -36,54 +36,25 @@
             tools:text=" Uploaded 4 months ago"
             android:textAlignment="textStart"
             android:textSize="@dimen/_7sdp"
-            app:layout_constraintEnd_toStartOf="@id/history_id"
+            app:layout_constraintEnd_toStartOf="@id/size"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/title" />
+            app:layout_constraintTop_toBottomOf="@id/title_id" />
 
-        <ImageView
-            android:id="@+id/history_id"
-            android:layout_width="@dimen/_19sdp"
-            android:layout_height="@dimen/_19sdp"
-            android:layout_marginEnd="@dimen/_90sdp"
-            android:src="@drawable/download"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+
 
         <TextView
-            android:id="@+id/size"
-            style="@style/TextNormalLine"
+            android:id="@+id/size_id"
+            style="@style/TextCategory"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/_57sdp"
-            tools:text="1.73gb"
-android:textAlignment="textStart"
+            android:layout_marginEnd="@dimen/_15sdp"
+            tools:text="Size: 1.73gb"
+            android:textAlignment="textStart"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/seeders"
-            style="@style/TextNormalLine"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/_30sdp"
-            tools:text="920"
 
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/leechers"
-            style="@style/TextNormalLine"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/_5sdp"
-            tools:text="200"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
     </android.support.constraint.ConstraintLayout>
 

@@ -3,19 +3,64 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Fragments.HistoryFragment">
 
-    <cn.hugeterry.coordinatortablayout.CoordinatorTabLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/coordinator_tab_layout_id"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <android.support.v4.view.ViewPager
-            android:id="@+id/view_pager_id"
+        <android.support.design.widget.TabLayout
+            android:id="@+id/tab_layout_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/blue"
+            app:tabTextColor="@color/cardview_light_background"
+            app:tabTextAppearance="@style/TextCategory"
+            app:tabSelectedTextColor="@color/red"
+            >
+            <android.support.design.widget.TabItem
+                android:id="@+id/all"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="All"
+                />
+
+            <android.support.design.widget.TabItem
+                android:id="@+id/movies"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Movies" />
+
+            <android.support.design.widget.TabItem
+                android:id="@+id/tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tv" />
+
+            <android.support.design.widget.TabItem
+                android:id="@+id/artist"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Games" />
+            <android.support.design.widget.TabItem
+                android:id="@+id/software_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Apps" />
+        </android.support.design.widget.TabLayout>
+
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_id"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
-    </cn.hugeterry.coordinatortablayout.CoordinatorTabLayout>
+            android:background="@drawable/MainBackground"
+           android:layout_below="@+id/tab_layout_id"
+            ></android.support.v7.widget.RecyclerView>
+
+    </RelativeLayout>
+
+
 
 </FrameLayout>

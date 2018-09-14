@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
-import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Parcelable;
 import android.support.annotation.NonNull;
@@ -15,7 +14,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
@@ -83,7 +81,7 @@ public class TorrentAdapter extends RecyclerView.Adapter<TorrentAdapter.TorrentV
             title = itemView.findViewById(R.id.title);
             seeders = itemView.findViewById(R.id.seeders);
             leechers = itemView.findViewById(R.id.leechers);
-            downloadImage = itemView.findViewById(R.id.download_id);
+            downloadImage = itemView.findViewById(R.id.history_id);
             size = itemView.findViewById(R.id.size);
             date = itemView.findViewById(R.id.date);
             cardView = itemView.findViewById(R.id.cardview);

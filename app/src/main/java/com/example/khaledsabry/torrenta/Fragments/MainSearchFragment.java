@@ -2,8 +2,10 @@ package com.example.khaledsabry.torrenta.Fragments;
 
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
@@ -32,27 +34,8 @@ public class MainSearchFragment extends Fragment {
 
     static type type;
 
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putSerializable("time_data", (Serializable) type);
-        outState.putBoolean("opened", true);
-
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setHasOptionsMenu(true);
 
 
-        if (savedInstanceState != null) {
-            // restore value of members from saved state
-            type = (MainSearchFragment.type) savedInstanceState.getSerializable("time_data");
-        }
-
-
-    }
 
     public static MainSearchFragment newInstance(type type) {
         MainSearchFragment fragment = new MainSearchFragment();
@@ -66,17 +49,12 @@ public class MainSearchFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_main_search, container, false);
         toolbar = view.findViewById(R.id.toolbar);
+MainActivity.getActivity().setSupportActionBar(toolbar);
 
         torrentFragment = TorrentFragment.newInstance();
-        MainActivity.getActivity().setSupportActionBar(toolbar);
 
         determineType();
-        if (savedInstanceState != null)
-        {
-            if (!savedInstanceState.getBoolean("opened"))
-                MainActivity.loadFragmentNoReturn(R.id.torrent_search_items_id, torrentFragment);
-    }
-    else
+
             MainActivity.loadFragmentNoReturn(R.id.torrent_search_items_id, torrentFragment);
 
 
@@ -94,11 +72,16 @@ public class MainSearchFragment extends Fragment {
         }
     }
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 
-        inflater.inflate(R.menu.main_bar_menu, menu);
+       inflater.inflate(R.menu.main_bar_menu, menu);
 
         MenuItem menuItem = menu.findItem(R.id.app_bar_search);
         searchView = (SearchView) menuItem.getActionView();

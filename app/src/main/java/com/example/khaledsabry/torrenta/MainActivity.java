@@ -32,12 +32,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        if (savedInstanceState != null)
-        {
-            if (!savedInstanceState.getBoolean("opened"))
-                loadFragmentWithReturn(R.id.main_container, mainFragment);
-    }
-    else
+
             loadFragmentWithReturn(R.id.main_container, mainFragment);
 
     }
@@ -107,11 +102,5 @@ public class MainActivity extends AppCompatActivity {
         }, 1000, 2000);
     }
 
-
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putBoolean("opened", true);
-    }
 
 }

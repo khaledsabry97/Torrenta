@@ -15,8 +15,6 @@ import com.example.khaledsabry.torrenta.Functions.Functions;
 import com.example.khaledsabry.torrenta.MainActivity;
 import com.example.khaledsabry.torrenta.R;
 
-import java.io.Serializable;
-
 
 public class MainFragment extends Fragment {
 
@@ -29,7 +27,6 @@ public class MainFragment extends Fragment {
     //3 --> games
     //4 --> software
     int id = -1;
-    Bundle savedInstanceState;
 
     public static MainFragment newInstance() {
         MainFragment fragment = new MainFragment();
@@ -45,7 +42,6 @@ public class MainFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_main, container, false);
         drawerLayout = view.findViewById(R.id.drawer_layout_id);
         navigationView = view.findViewById(R.id.navigation_view_id);
-        this.savedInstanceState = savedInstanceState;
 
         setNavigationView();
 
@@ -66,11 +62,7 @@ public class MainFragment extends Fragment {
             }
         });
 
-        if (savedInstanceState != null)
-        {
-            if (!savedInstanceState.getBoolean("opened"))
-                selectIndex(id);
-    }    else
+
             selectIndex(id);
     }
 
@@ -102,9 +94,9 @@ public class MainFragment extends Fragment {
                 MainActivity.loadFragmentNoReturn(R.id.main_frame, null);
                 break;
             //todo DATABASE fragment
-            case R.id.download_id:
-                type = -1;
-                MainActivity.loadFragmentNoReturn(R.id.main_frame, null);
+            case R.id.history_id:
+                type = 5;
+                MainActivity.loadFragmentNoReturn(R.id.main_frame, HistoryFragment.newInstance());
                 break;
             //todo ABOUTME fragment
             case R.id.about_me_id:
@@ -115,25 +107,4 @@ public class MainFragment extends Fragment {
         }
     }
 
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putSerializable("time_data", (Serializable) id);
-        outState.putBoolean("opened", true);
-
-    }
-
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-
-        if (savedInstanceState != null) {
-            id = (int) savedInstanceState.get("time_data");
-            // restore value of members from saved state
-        }
-
-
-    }
 }

@@ -2,6 +2,7 @@ package com.example.khaledsabry.torrenta.Controllers;
 
 import android.os.AsyncTask;
 
+import com.example.khaledsabry.torrenta.Functions.Functions;
 import com.example.khaledsabry.torrenta.Interface.OnDatabaseSuccess;
 import com.example.khaledsabry.torrenta.Interface.OnSuccess;
 import com.example.khaledsabry.torrenta.MainActivity;
@@ -91,9 +92,9 @@ private OnSuccess.bool listener = new OnSuccess.bool() {
    {
        HistoryItem item = new HistoryItem();
        try {
-           item.setName(jsonObject.getString(history.name));
-           item.setDate(jsonObject.getString(history.date));
-           item.setSize(jsonObject.getString(history.size));
+           item.setName(jsonObject.getString(Functions.removeQoutes(history.name)));
+           item.setDate(jsonObject.getString(Functions.removeQoutes(history.date)));
+           item.setSize(jsonObject.getString(Functions.removeQoutes(history.size)));
 
 
            historyItems.add(item);

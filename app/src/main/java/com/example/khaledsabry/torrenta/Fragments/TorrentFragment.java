@@ -36,25 +36,7 @@ public class TorrentFragment extends Fragment implements OnSuccess.bool {
 
 
 ArrayList<Torrent> torrents;
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putSerializable("time_data", (Serializable) torrents);
-    }
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-
-
-        if (savedInstanceState != null) {
-            // restore value of members from saved state
-            torrents = (ArrayList<Torrent>) savedInstanceState.getSerializable("time_data");
-        }
-
-
-    }
     public static TorrentFragment newInstance() {
         TorrentFragment fragment = new TorrentFragment();
         return fragment;

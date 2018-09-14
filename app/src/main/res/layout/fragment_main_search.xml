@@ -22,7 +22,6 @@
             android:theme="@style/ThemeOverlay.AppCompat.Dark"
             android:background="@color/brownandblack"
             ></android.support.v7.widget.Toolbar>
-
         <FrameLayout
             android:id="@+id/torrent_search_items_id"
             android:layout_width="match_parent"

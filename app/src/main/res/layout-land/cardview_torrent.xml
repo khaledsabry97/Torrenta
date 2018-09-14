@@ -51,7 +51,7 @@
             />
 
         <ImageView
-            android:id="@+id/download_id"
+            android:id="@+id/history_id"
             android:layout_width="@dimen/_19sdp"
             android:layout_height="@dimen/_19sdp"
             android:layout_marginBottom="2dp"

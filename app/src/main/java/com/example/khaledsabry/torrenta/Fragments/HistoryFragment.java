@@ -2,26 +2,31 @@ package com.example.khaledsabry.torrenta.Fragments;
 
 
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.khaledsabry.torrenta.Adapters.HistoryAdapter;
+import com.example.khaledsabry.torrenta.Controllers.HistoryController;
+import com.example.khaledsabry.torrenta.Interface.OnSuccess;
 import com.example.khaledsabry.torrenta.R;
+import com.example.khaledsabry.torrenta.items.HistoryItem;
 
 import java.util.ArrayList;
-
-import cn.hugeterry.coordinatortablayout.CoordinatorTabLayout;
 
 
 public class HistoryFragment extends Fragment {
 
-    CoordinatorTabLayout tabLayout;
-    ArrayList<String> headers;
     ArrayList<Fragment> fragments;
-    ViewPager viewPager;
+    TabLayout tabLayout;
+    RecyclerView recyclerView;
+    HistoryAdapter historyAdapter;
+    HistoryController historyController;
+
     public static HistoryFragment newInstance() {
         HistoryFragment fragment = new HistoryFragment();
 
@@ -33,21 +38,67 @@ public class HistoryFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_history, container, false);
-tabLayout = view.findViewById(R.id.coordinator_tab_layout_id);
-viewPager = view.findViewById(R.id.view_pager_id);
-
-setupFragments();
-setupViewPager();
-tabLayout.setTitle("History");
+        tabLayout = view.findViewById(R.id.tab_layout_id);
+recyclerView = view.findViewById(R.id.recycler_id);
+        historyAdapter = new HistoryAdapter();
+        historyController = new HistoryController();
+        setupTabLayout();
+        setupRecyclerView();
         return view;
     }
 
-    private void setupFragments() {
-
+    private void setupRecyclerView() {
+        recyclerView.setAdapter(historyAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
     }
 
-    private void setupViewPager() {
-        viewPager.setAdapter(new HistoryAdapter(getFragmentManager(),headers,fragments));
+    private void setupTabLayout() {
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                selectTab(tab.getPosition());
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
+
+        selectTab(0);
     }
+
+
+    private void selectTab(int index) {
+        switch (index) {
+            case 0:
+                historyController.getAllHistory(new OnSuccess.array() {
+                    @Override
+                    public void onSuccess(ArrayList<Object> historyItems) {
+                        historyAdapter.setItems((ArrayList<HistoryItem>) (Object) historyItems);
+                    }
+                });
+
+                break;
+            case 1:
+
+                break;
+            case 2:
+
+                break;
+            case 3:
+
+                break;
+            case 4:
+
+                break;
+        }
+    }
+
 
 }
