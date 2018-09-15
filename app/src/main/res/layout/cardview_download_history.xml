@@ -18,27 +18,29 @@
             style="@style/TextCategoryNonUniformNoLines"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_6sdp"
             android:layout_marginStart="@dimen/_5sdp"
             android:layout_marginTop="@dimen/_3sdp"
-            tools:text="avegners infinity war 1080p"
 
             android:textAlignment="textStart"
-            app:layout_constraintEnd_toStartOf="@id/size"
+            app:layout_constraintEnd_toStartOf="@+id/size_id"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="avegners infinity war 1080p sdfdsf sdf ds sdfdf" />
 
         <TextView
             android:id="@+id/date_id"
             style="@style/TextNormalLine"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
             android:layout_marginStart="@dimen/_5sdp"
-            tools:text=" Uploaded 4 months ago"
             android:textAlignment="textStart"
             android:textSize="@dimen/_7sdp"
-            app:layout_constraintEnd_toStartOf="@id/size"
+            app:layout_constraintEnd_toStartOf="@+id/size_id"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/title_id" />
+            app:layout_constraintTop_toBottomOf="@id/title_id"
+            tools:text=" Uploaded 4 months ago" />
 
 
 
@@ -51,11 +53,19 @@
             tools:text="Size: 1.73gb"
             android:textAlignment="textStart"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/remove_id"
             app:layout_constraintTop_toTopOf="parent" />
 
 
-
+        <ImageView
+            android:id="@+id/remove_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_15sdp"
+            android:background="@drawable/ic_delete_forever_black_24dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
     </android.support.constraint.ConstraintLayout>
 
 </android.support.v7.widget.CardView>

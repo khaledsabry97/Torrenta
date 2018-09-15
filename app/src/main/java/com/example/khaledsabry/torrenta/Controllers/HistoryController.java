@@ -3,6 +3,7 @@ package com.example.khaledsabry.torrenta.Controllers;
 import android.os.AsyncTask;
 
 import com.example.khaledsabry.torrenta.Functions.Functions;
+import com.example.khaledsabry.torrenta.Functions.Toasts;
 import com.example.khaledsabry.torrenta.Interface.OnDatabaseSuccess;
 import com.example.khaledsabry.torrenta.Interface.OnSuccess;
 import com.example.khaledsabry.torrenta.MainActivity;
@@ -25,7 +26,7 @@ private OnSuccess.bool listener = new OnSuccess.bool() {
     public void addAllToHistory(String name,String size, final OnSuccess.bool listener)
     {
         this.listener = listener;
-        databaseController.insertController().AddHistory(name,size, all, this);
+        databaseController.insertController().AddHistory(name,size, general, this);
 
 
     }
@@ -83,6 +84,92 @@ private OnSuccess.bool listener = new OnSuccess.bool() {
     }
 
 
+    public void getMovieHistory(final OnSuccess.array listener)
+    {
+        AsyncTask.execute(new Runnable() {
+            @Override
+            public void run() {
+                ArrayList<JSONObject> jsonObjects = databaseController.selectController().getMovieHistory();
+                final ArrayList<HistoryItem> historyItems =setJsonsToHistoryItem(jsonObjects);
+                MainActivity.getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        //todo: is to put the data into the recycler view
+                        listener.onSuccess((ArrayList<Object>) (Object) historyItems);
+                    }
+                });
+
+
+            }
+        });
+    }
+
+
+    public void getTvHistory(final OnSuccess.array listener)
+    {
+        AsyncTask.execute(new Runnable() {
+            @Override
+            public void run() {
+                ArrayList<JSONObject> jsonObjects =      databaseController.selectController().getTvHistory();
+                final ArrayList<HistoryItem> historyItems =setJsonsToHistoryItem(jsonObjects);
+                MainActivity.getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        //todo: is to put the data into the recycler view
+                        listener.onSuccess((ArrayList<Object>) (Object) historyItems);
+                    }
+                });
+
+
+            }
+        });
+    }
+
+
+
+    public void getSoftwareHistory(final OnSuccess.array listener)
+    {
+        AsyncTask.execute(new Runnable() {
+            @Override
+            public void run() {
+                ArrayList<JSONObject> jsonObjects =      databaseController.selectController().getSoftwareHistory();
+                final ArrayList<HistoryItem> historyItems =setJsonsToHistoryItem(jsonObjects);
+                MainActivity.getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        //todo: is to put the data into the recycler view
+                        listener.onSuccess((ArrayList<Object>) (Object) historyItems);
+                    }
+                });
+
+
+            }
+        });
+    }
+
+
+
+    public void getGamesHistory(final OnSuccess.array listener)
+    {
+        AsyncTask.execute(new Runnable() {
+            @Override
+            public void run() {
+                ArrayList<JSONObject> jsonObjects =      databaseController.selectController().getGamesHistory();
+                final ArrayList<HistoryItem> historyItems =setJsonsToHistoryItem(jsonObjects);
+                MainActivity.getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        //todo: is to put the data into the recycler view
+                        listener.onSuccess((ArrayList<Object>) (Object) historyItems);
+                    }
+                });
+
+
+            }
+        });
+    }
+
+
 
     private ArrayList<HistoryItem> setJsonsToHistoryItem(ArrayList<JSONObject> jsonObjects)
     {
@@ -92,6 +179,7 @@ private OnSuccess.bool listener = new OnSuccess.bool() {
    {
        HistoryItem item = new HistoryItem();
        try {
+           item.setId(jsonObject.getString(Functions.removeQoutes(history.id)));
            item.setName(jsonObject.getString(Functions.removeQoutes(history.name)));
            item.setDate(jsonObject.getString(Functions.removeQoutes(history.date)));
            item.setSize(jsonObject.getString(Functions.removeQoutes(history.size)));
@@ -108,6 +196,24 @@ private OnSuccess.bool listener = new OnSuccess.bool() {
    return historyItems;
 
 
+    }
+
+
+
+    public void deleteHistoryItem(final String id)
+    {
+        AsyncTask.execute(new Runnable() {
+            @Override
+            public void run() {
+                databaseController.deleteController().historyDeleteItem(id);
+                MainActivity.getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toasts.success("Deleted Successfully");
+                    }
+                });
+            }
+        });
     }
 
 

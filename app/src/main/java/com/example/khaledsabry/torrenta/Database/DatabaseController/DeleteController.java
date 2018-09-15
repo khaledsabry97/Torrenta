@@ -8,7 +8,11 @@ public class DeleteController extends DatabaseController {
     private String condition = "";
 
 
-    public void categoryDeleteHistory(String tmdbId) {
+    public void historyDeleteItem(String id) {
+table = history.tableName;
+condition += history.id +equal+ id;
+
+getWritableDatabase().execSQL(createDeleteQuery(table,condition));
 
 
     }

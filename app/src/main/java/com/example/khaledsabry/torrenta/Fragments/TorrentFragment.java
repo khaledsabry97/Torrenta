@@ -2,6 +2,7 @@ package com.example.khaledsabry.torrenta.Fragments;
 
 
 import android.os.Bundle;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -50,6 +51,7 @@ ArrayList<Torrent> torrents;
         recyclerView = view.findViewById(R.id.recycler_id);
 historyController = new HistoryController();
         torrentController = new TorrentController();
+        NavigationView navigationView ;
         setupRecyclerView();
 
         return view;

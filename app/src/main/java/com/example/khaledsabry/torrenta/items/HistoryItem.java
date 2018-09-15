@@ -2,11 +2,20 @@ package com.example.khaledsabry.torrenta.items;
 
 public class HistoryItem {
 
+    private String id;
     private String name;
     private String date;
     private String size;
     private String files;
 
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;

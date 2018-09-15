@@ -18,6 +18,7 @@ import android.widget.TextView;
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
 import com.example.khaledsabry.torrenta.Controllers.HistoryController;
+import com.example.khaledsabry.torrenta.Fragments.MainSearchFragment;
 import com.example.khaledsabry.torrenta.Interface.OnSuccess;
 import com.example.khaledsabry.torrenta.MainActivity;
 import com.example.khaledsabry.torrenta.R;
@@ -160,20 +161,22 @@ public class TorrentAdapter extends RecyclerView.Adapter<TorrentAdapter.TorrentV
 
 
         void addToHistory() {
-            switch (MainActivity.getActivity().mainFragment.type) {
-                case 0:
+            if(MainSearchFragment.type == null)
+                return;
+            switch (MainSearchFragment.type) {
+                case general:
                     historyController.addAllToHistory(name, sizes, this);
                     break;
-                case 1:
+                case movie:
                     historyController.addMovieToHistory(name, sizes, this);
                     break;
-                case 2:
+                case tv:
                     historyController.addTvToHistory(name, sizes, this);
                     break;
-                case 3:
+                case games:
                     historyController.addGamesToHistory(name, sizes, this);
                     break;
-                case 4:
+                case software:
                     historyController.addSoftwareToHistory(name, sizes, this);
                     break;
             }

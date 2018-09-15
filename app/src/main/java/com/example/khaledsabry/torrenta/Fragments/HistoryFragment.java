@@ -86,16 +86,36 @@ recyclerView = view.findViewById(R.id.recycler_id);
 
                 break;
             case 1:
-
+                historyController.getMovieHistory(new OnSuccess.array() {
+                    @Override
+                    public void onSuccess(ArrayList<Object> historyItems) {
+                        historyAdapter.setItems((ArrayList<HistoryItem>) (Object) historyItems);
+                    }
+                });
                 break;
             case 2:
-
+                historyController.getTvHistory(new OnSuccess.array() {
+                    @Override
+                    public void onSuccess(ArrayList<Object> historyItems) {
+                        historyAdapter.setItems((ArrayList<HistoryItem>) (Object) historyItems);
+                    }
+                });
                 break;
             case 3:
-
+                historyController.getGamesHistory(new OnSuccess.array() {
+                    @Override
+                    public void onSuccess(ArrayList<Object> historyItems) {
+                        historyAdapter.setItems((ArrayList<HistoryItem>) (Object) historyItems);
+                    }
+                });
                 break;
             case 4:
-
+                historyController.getSoftwareHistory(new OnSuccess.array() {
+                    @Override
+                    public void onSuccess(ArrayList<Object> historyItems) {
+                        historyAdapter.setItems((ArrayList<HistoryItem>) (Object) historyItems);
+                    }
+                });
                 break;
         }
     }

@@ -3,6 +3,8 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 27
     defaultConfig {
+        vectorDrawables.useSupportLibrary = true
+
         applicationId "com.example.khaledsabry.torrenta"
         minSdkVersion 19
         targetSdkVersion 27
@@ -56,5 +58,6 @@ dependencies {
 
     implementation 'cn.hugeterry.coordinatortablayout:coordinatortablayout:1.2.2'
 
+    implementation 'com.github.jrvansuita:MaterialAbout:+'
 
 }
