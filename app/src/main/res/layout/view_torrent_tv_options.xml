@@ -1,6 +1,244 @@
-<?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/blue">
 
-</android.support.constraint.ConstraintLayout>
+
+
+    <LinearLayout
+        android:id="@+id/containerid"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/_2sdp"
+        android:layout_marginStart="@dimen/_2sdp"
+        android:layout_marginTop="@dimen/_3sdp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_4sdp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/sort_id"
+                style="@style/TextCategoryRound"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Sort By"
+                android:textColor="@color/white" />
+
+
+            <com.jaredrummler.materialspinner.MaterialSpinner
+                android:id="@+id/sort_spinner_id"
+                style="@style/MaterialSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_3sdp"
+                android:textSize="@dimen/_7sdp"
+                app:ms_background_color="@color/cardview_dark_background"
+                app:ms_dropdown_max_height="@dimen/_120sdp" />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_4sdp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/resolution_id"
+                style="@style/TextCategoryRound"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Resolution"
+                android:textColor="@color/white" />
+
+
+            <com.jaredrummler.materialspinner.MaterialSpinner
+                android:id="@+id/resolution_spinner_id"
+                style="@style/MaterialSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_3sdp"
+                android:textSize="@dimen/_7sdp"
+                app:ms_background_color="@color/cardview_dark_background"
+                app:ms_dropdown_max_height="@dimen/_120sdp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_4sdp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/quality_id"
+                style="@style/TextCategoryRound"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Quality"
+                android:textColor="@color/white" />
+
+            <com.jaredrummler.materialspinner.MaterialSpinner
+                android:id="@+id/quality_spinner_id"
+                style="@style/MaterialSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="@dimen/_3sdp"
+                android:textSize="@dimen/_7sdp"
+                app:ms_background_color="@color/cardview_dark_background"
+                app:ms_dropdown_max_height="@dimen/_120sdp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/_4sdp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/provider_id"
+                style="@style/TextCategoryRound"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Encoder"
+                android:textColor="@color/white" />
+
+
+            <com.jaredrummler.materialspinner.MaterialSpinner
+                android:id="@+id/provider_spinner_id"
+                style="@style/MaterialSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:textSize="@dimen/_7sdp"
+                app:ms_background_color="@color/cardview_dark_background"
+                app:ms_dropdown_max_height="@dimen/_120sdp" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/_4sdp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/codec_id"
+                style="@style/TextCategoryRound"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:text="codec"
+                android:textAlignment="center"
+                android:textColor="@color/cardview_light_background" />
+
+            <com.jaredrummler.materialspinner.MaterialSpinner
+                android:id="@+id/codec_spinner_id"
+                style="@style/MaterialSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_3sdp"
+                android:textSize="@dimen/_7sdp"
+                app:ms_background_color="@color/cardview_dark_background"
+                app:ms_dropdown_max_height="@dimen/_120sdp" />
+
+        </LinearLayout>
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/_4sdp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/features_id"
+                style="@style/TextCategoryRound"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Features"
+                android:textColor="@color/white" />
+
+            <com.jaredrummler.materialspinner.MaterialSpinner
+                android:id="@+id/features_spinner_id"
+                style="@style/MaterialSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_3sdp"
+                android:textSize="@dimen/_7sdp"
+                app:ms_background_color="@color/cardview_dark_background"
+                app:ms_dropdown_max_height="@dimen/_120sdp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/_4sdp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/seasons_id"
+                style="@style/TextCategoryRound"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Season"
+                android:textColor="@color/white" />
+
+            <com.jaredrummler.materialspinner.MaterialSpinner
+                android:id="@+id/seasons_spinner_id"
+                style="@style/MaterialSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_3sdp"
+                android:textSize="@dimen/_7sdp"
+                app:ms_background_color="@color/cardview_dark_background"
+                app:ms_dropdown_max_height="@dimen/_120sdp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/_4sdp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/episode_id"
+                style="@style/TextCategoryRound"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Episode"
+                android:textColor="@color/white" />
+
+            <com.jaredrummler.materialspinner.MaterialSpinner
+                android:id="@+id/episode_spinner_id"
+                style="@style/MaterialSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_3sdp"
+                android:textSize="@dimen/_7sdp"
+                app:ms_background_color="@color/cardview_dark_background"
+                app:ms_dropdown_max_height="@dimen/_120sdp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</FrameLayout>

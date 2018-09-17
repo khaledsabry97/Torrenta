@@ -37,11 +37,7 @@ public class MovieSearchFragment extends Fragment {
         drawerLayout = view.findViewById(R.id.drawer_layout_id);
         navigationView = view.findViewById(R.id.navigation_view_id);
 
-        resolution = view.findViewById(R.id.resolution_spinner_id);
-        provider = view.findViewById(R.id.provider_spinner_id);
-        quality = view.findViewById(R.id.quality_spinner_id);
-        codec = view.findViewById(R.id.codec_spinner_id);
-        features = view.findViewById(R.id.features_spinner_id);
+
 
         return view;
     }
