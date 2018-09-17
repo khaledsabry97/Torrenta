@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    xmlns:ads="http://schemas.android.com/apk/res-auto"
     android:id="@+id/fragment_main_search"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -17,24 +17,24 @@
         android:fitsSystemWindows="true">
 
 
-<android.support.v4.widget.DrawerLayout
-    android:id="@+id/drawer_layout_id"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fitsSystemWindows="true">
+        <android.support.v4.widget.DrawerLayout
+            android:id="@+id/drawer_layout_id"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fitsSystemWindows="true">
 
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
 
                 <android.support.v7.widget.Toolbar
                     android:id="@+id/toolbar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/brownandblack"
+                    android:background="@color/toolbar_color"
                     android:theme="@style/ThemeOverlay.AppCompat.Dark"
                     app:title="Torrenta"></android.support.v7.widget.Toolbar>
 
@@ -47,39 +47,36 @@
 
                 </FrameLayout>
 
-        <com.google.android.gms.ads.AdView
-            android:id="@+id/adView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_alignParentBottom="true"
-            ads:adSize="BANNER"
-            ads:adUnitId="@string/banner_ad_unit_id"
-            >
-        </com.google.android.gms.ads.AdView>
+                <com.google.android.gms.ads.AdView
+                    android:id="@+id/adView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    ads:adSize="BANNER"
+                    ads:adUnitId="@string/banner_ad_unit_id"></com.google.android.gms.ads.AdView>
 
-    </LinearLayout>
+            </LinearLayout>
 
-    <android.support.design.widget.NavigationView
-        android:id="@+id/navigation_view_id"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_gravity="end">
+            <android.support.design.widget.NavigationView
+                android:id="@+id/navigation_view_id"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="end">
 
-        <include
-            android:id="@+id/movie_id"
-            android:visibility="gone"
-            layout="@layout/view_torrent_movie_options"></include>
+                <include
+                    android:id="@+id/movie_id"
+                    layout="@layout/view_torrent_movie_options"
+                    android:visibility="gone"></include>
 
-        <include
-            android:id="@+id/tv_id"
-            android:visibility="gone"
-            layout="@layout/view_torrent_tv_options"></include>
-    </android.support.design.widget.NavigationView>
-</android.support.v4.widget.DrawerLayout>
+                <include
+                    android:id="@+id/tv_id"
+                    layout="@layout/view_torrent_tv_options"
+                    android:visibility="gone"></include>
+            </android.support.design.widget.NavigationView>
+        </android.support.v4.widget.DrawerLayout>
 
     </RelativeLayout>
-
 
 
 </FrameLayout>

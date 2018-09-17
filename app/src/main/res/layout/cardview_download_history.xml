@@ -21,7 +21,7 @@
             android:layout_marginEnd="@dimen/_6sdp"
             android:layout_marginStart="@dimen/_5sdp"
             android:layout_marginTop="@dimen/_3sdp"
-
+            android:maxLines="2"
             android:textAlignment="textStart"
             app:layout_constraintEnd_toStartOf="@+id/size_id"
             app:layout_constraintStart_toStartOf="parent"
@@ -43,18 +43,17 @@
             tools:text=" Uploaded 4 months ago" />
 
 
-
         <TextView
             android:id="@+id/size_id"
             style="@style/TextCategory"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/_15sdp"
-            tools:text="Size: 1.73gb"
             android:textAlignment="textStart"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/remove_id"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Size: 1.73gb" />
 
 
         <ImageView

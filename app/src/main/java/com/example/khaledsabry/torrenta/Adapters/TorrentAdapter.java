@@ -80,10 +80,10 @@ public class TorrentAdapter extends RecyclerView.Adapter<TorrentAdapter.TorrentV
         public TorrentViewHolder(View itemView) {
             super(itemView);
             title = itemView.findViewById(R.id.title);
-            seeders = itemView.findViewById(R.id.seeders);
-            leechers = itemView.findViewById(R.id.leechers);
+            seeders = itemView.findViewById(R.id.seeders_id);
+            leechers = itemView.findViewById(R.id.leechers_id);
             downloadImage = itemView.findViewById(R.id.history_id);
-            size = itemView.findViewById(R.id.size);
+            size = itemView.findViewById(R.id.size_id);
             date = itemView.findViewById(R.id.date);
             cardView = itemView.findViewById(R.id.cardview);
 

@@ -158,6 +158,8 @@ public class MainSearchFragment extends Fragment {
         toolbar.setTitle("General");
         drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
         categorySearch = "";
+        disableAllContainers();
+        resetSpinners();
     }
 
     private void adjustLayoutForMovie() {
@@ -181,6 +183,8 @@ public class MainSearchFragment extends Fragment {
         toolbar.setTitle("Games");
         drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
         categorySearch = "&type=games";
+        disableAllContainers();
+        resetSpinners();
 
     }
 
@@ -188,6 +192,8 @@ public class MainSearchFragment extends Fragment {
         toolbar.setTitle("Software Torrents");
         drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
         categorySearch = "&type=software";
+        disableAllContainers();
+        resetSpinners();
 
     }
 
