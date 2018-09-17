@@ -16,6 +16,32 @@
         android:layout_marginTop="@dimen/_2sdp"
         android:orientation="vertical">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_2sdp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/sort_id"
+                style="@style/TextCategoryRound"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/sort" />
+
+
+            <com.jaredrummler.materialspinner.MaterialSpinner
+                android:id="@+id/sort_spinner_id"
+                style="@style/MaterialSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_3sdp"
+                android:textSize="@dimen/_7sdp"
+                app:ms_background_color="@color/spinner_color"
+                app:ms_dropdown_max_height="@dimen/_120sdp" />
+
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"

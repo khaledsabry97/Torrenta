@@ -5,7 +5,9 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
@@ -48,14 +50,15 @@ public class MainSearchFragment extends Fragment {
     String categorySearch = "";
     String containerSearchString = "";
     String searchText = "";
-
+DrawerLayout mainDrawer;
     View movieContainer;
     View tvContainer;
 
 
-    public static MainSearchFragment newInstance(Type type) {
+    public static MainSearchFragment newInstance(Type type,DrawerLayout drawerLayout) {
         MainSearchFragment fragment = new MainSearchFragment();
         fragment.type = type;
+        fragment.mainDrawer = drawerLayout;
         return fragment;
     }
 
@@ -95,6 +98,15 @@ public class MainSearchFragment extends Fragment {
 
     private void setupToolbar() {
         MainActivity.getActivity().setSupportActionBar(toolbar);
+        ActionBar actionbar = MainActivity.getActivity().getSupportActionBar();
+        toolbar.setNavigationIcon(R.drawable.ic_view_headline_white_48dp);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(mainDrawer != null)
+                mainDrawer.openDrawer(GravityCompat.START,true);
+            }
+        });
 
     }
 

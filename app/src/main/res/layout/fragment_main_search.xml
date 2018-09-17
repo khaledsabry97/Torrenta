@@ -14,14 +14,14 @@
         android:id="@+id/coordinatorLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fitsSystemWindows="true">
+      >
 
 
         <android.support.v4.widget.DrawerLayout
             android:id="@+id/drawer_layout_id"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:fitsSystemWindows="true">
+            >
 
 
             <LinearLayout
@@ -35,7 +35,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/toolbar_color"
-                    android:theme="@style/ThemeOverlay.AppCompat.Dark"
+                    android:theme="@style/ToolbarTheme"
+                    app:titleTextAppearance="@style/TextCategory"
+                    android:fitsSystemWindows="true"
                     app:title="Torrenta"></android.support.v7.widget.Toolbar>
 
                 <FrameLayout
@@ -54,6 +56,7 @@
                     android:layout_alignParentBottom="true"
                     android:layout_centerHorizontal="true"
                     ads:adSize="BANNER"
+                    android:visibility="gone"
                     ads:adUnitId="@string/banner_ad_unit_id"></com.google.android.gms.ads.AdView>
 
             </LinearLayout>
@@ -62,6 +65,7 @@
                 android:id="@+id/navigation_view_id"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                app:itemTextColor="@color/white"
                 android:layout_gravity="end">
 
                 <include

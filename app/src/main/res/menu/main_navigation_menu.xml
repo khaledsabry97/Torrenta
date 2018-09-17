@@ -1,34 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <group
+        android:id="@+id/torrent"
+        android:checkableBehavior="single">
+
+
+
+
+
     <item
-        android:id="@+id/all_id"
-        android:title="All"></item>
+        android:id="@+id/general_id"
+        android:title="@string/general"></item>
 
     <item
         android:id="@+id/movie_id"
-        android:title="Movies"></item>
+        android:title="@string/movies"></item>
 
     <item
         android:id="@+id/tv_id"
-        android:title="Tv Series"></item>
+        android:title="@string/tv_series"></item>
 
     <item
         android:id="@+id/games_id"
-        android:title="Games"></item>
+        android:title="@string/games"></item>
 
 
-    <item
-        android:id="@+id/software_id"
-        android:title="Software"></item>
+        <item
+            android:id="@+id/software_id"
+            android:title="@string/apps" />
+
+    </group>
+
+    <group
+        android:id="@+id/some"
+        android:checkableBehavior="single">
+
 
 
     <item
         android:id="@+id/history_id"
-        android:title="Downloads"></item>
+        android:title="@string/history"></item>
 
 
     <item
         android:id="@+id/about_me_id"
-        android:title="About Me"></item>
+        android:title="@string/about_me"></item>
+
+    </group>
 </menu>
