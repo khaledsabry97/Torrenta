@@ -41,8 +41,6 @@ public class MainFragment extends Fragment {
         navigationView = view.findViewById(R.id.navigation_view_id);
 
         setNavigationView();
-
-
         return view;
     }
 
@@ -67,23 +65,23 @@ public class MainFragment extends Fragment {
         switch (id) {
             case R.id.general_id:
                 type = Type.general;
-                MainActivity.loadFragmentNoReturn(R.id.main_frame, MainSearchFragment.newInstance(type,drawerLayout));
+                MainActivity.loadFragmentNoReturn(R.id.main_frame, SearchFragment.newInstance(type,drawerLayout));
                 break;
             case R.id.movie_id:
                 type = Type.movie;
-                MainActivity.loadFragmentNoReturn(R.id.main_frame, MainSearchFragment.newInstance(type,drawerLayout));
+                MainActivity.loadFragmentNoReturn(R.id.main_frame, SearchFragment.newInstance(type,drawerLayout));
                 break;
             case R.id.tv_id:
                 type = Type.tv;
-                MainActivity.loadFragmentNoReturn(R.id.main_frame, MainSearchFragment.newInstance(type,drawerLayout));
+                MainActivity.loadFragmentNoReturn(R.id.main_frame, SearchFragment.newInstance(type,drawerLayout));
                 break;
             case R.id.games_id:
                 type = Type.games;
-                MainActivity.loadFragmentNoReturn(R.id.main_frame, MainSearchFragment.newInstance(type,drawerLayout));
+                MainActivity.loadFragmentNoReturn(R.id.main_frame, SearchFragment.newInstance(type,drawerLayout));
                 break;
             case R.id.software_id:
                 type = Type.software;
-                MainActivity.loadFragmentNoReturn(R.id.main_frame, MainSearchFragment.newInstance(type,drawerLayout));
+                MainActivity.loadFragmentNoReturn(R.id.main_frame, SearchFragment.newInstance(type,drawerLayout));
                 break;
             case R.id.history_id:
                 type = Type.history;

@@ -16,6 +16,7 @@ import java.util.Random;
 public class WebApi {
     //Singleton Pattern
     private static WebApi ourInstance;
+    AsyncTask<Void, Void, ArrayList<Torrent>> task;
 
     public static WebApi getInstance() {
         if (ourInstance == null)
@@ -34,8 +35,9 @@ public class WebApi {
      * @param listener   it returns a list of the torrent files after it gets it
      */
     public void skyTorrent(final String searchItem, final OnWebSuccess.OnTorrentSearch listener) {
-
-        AsyncTask<Void, Void, ArrayList<Torrent>> task = new AsyncTask<Void, Void, ArrayList<Torrent>>() {
+        if (task != null)
+            task.cancel(true);
+        task = new AsyncTask<Void, Void, ArrayList<Torrent>>() {
             @Override
             protected ArrayList<Torrent> doInBackground(Void... voids) {
                 ArrayList<Torrent> torrents = new ArrayList<>();

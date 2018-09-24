@@ -98,5 +98,19 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             tools:listitem="@layout/cardview_torrent" />
+
+        <include
+            android:id="@+id/result_id"
+            layout="@layout/view_search_state"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"></include>
+
+        <include
+            android:id="@+id/view_progress_id"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            layout="@layout/view_progress_bar"></include>
+
     </LinearLayout>
 </FrameLayout>

@@ -25,7 +25,6 @@ public class Functions {
 
     }
 
-
     public static String removeQoutes(String name)
     {
         return (String) name.subSequence(1,name.length()-1);

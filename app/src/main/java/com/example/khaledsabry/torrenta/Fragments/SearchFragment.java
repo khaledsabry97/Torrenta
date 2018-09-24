@@ -7,7 +7,6 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBar;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
@@ -16,8 +15,10 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import com.example.khaledsabry.torrenta.Enums.Type;
+import com.example.khaledsabry.torrenta.Interface.OnChange;
 import com.example.khaledsabry.torrenta.MainActivity;
 import com.example.khaledsabry.torrenta.R;
 import com.google.android.gms.ads.AdRequest;
@@ -28,14 +29,21 @@ import com.jaredrummler.materialspinner.MaterialSpinner;
 import java.util.ArrayList;
 
 
-public class MainSearchFragment extends Fragment {
+public class SearchFragment extends Fragment {
 
+    //right navigation bar
     DrawerLayout drawerLayout;
+    //left navigation bar
+    DrawerLayout mainDrawer;
+    //navigation bar
     NavigationView navigationView;
-
+    //toolbar head
     Toolbar toolbar;
+    //search view in the toolbar
     SearchView searchView;
+    //fragment that is resposible for the search
     TorrentFragment torrentFragment;
+    //spinners for to choose from
     MaterialSpinner provider;
     MaterialSpinner quality;
     MaterialSpinner resolution;
@@ -44,91 +52,27 @@ public class MainSearchFragment extends Fragment {
     MaterialSpinner sort;
     MaterialSpinner season;
     MaterialSpinner episode;
-    View movieNavigationInclude;
-    View tvNavigationInclude;
-    public static Type type;
+    //category search and this is text provided from the website
     String categorySearch = "";
-    String containerSearchString = "";
+    //the whole text we gather from the search view
     String searchText = "";
-DrawerLayout mainDrawer;
-    View movieContainer;
-    View tvContainer;
+    //enum type to determine how the right navigation will react
+    public static Type type;
+    //the navigation bar of spinners for movie
+    View movieNavigationInclude;
+    //the navigation bar of spinners for tv series
+    View tvNavigationInclude;
+    //reference object to the ad
+    AdView mAdView;
+
+    ProgressBar progressBar;
 
 
-    public static MainSearchFragment newInstance(Type type,DrawerLayout drawerLayout) {
-        MainSearchFragment fragment = new MainSearchFragment();
+    public static SearchFragment newInstance(Type type, DrawerLayout drawerLayout) {
+        SearchFragment fragment = new SearchFragment();
         fragment.type = type;
         fragment.mainDrawer = drawerLayout;
         return fragment;
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_main_search, container, false);
-        toolbar = view.findViewById(R.id.toolbar);
-        drawerLayout = view.findViewById(R.id.drawer_layout_id);
-        navigationView = view.findViewById(R.id.navigation_view_id);
-        resolution = view.findViewById(R.id.resolution_spinner_id);
-        provider = view.findViewById(R.id.provider_spinner_id);
-        quality = view.findViewById(R.id.quality_spinner_id);
-        codec = view.findViewById(R.id.codec_spinner_id);
-        features = view.findViewById(R.id.features_spinner_id);
-        movieNavigationInclude = view.findViewById(R.id.movie_id);
-        tvNavigationInclude = view.findViewById(R.id.tv_id);
-        movieContainer = view.findViewById(R.id.movie_id);
-        tvContainer = view.findViewById(R.id.tv_id);
-
-        MobileAds.initialize(getContext(), "ca-app-pub-9364776584437772~6544419095");
-        AdView mAdView;
-        mAdView = view.findViewById(R.id.adView);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
-        torrentFragment = TorrentFragment.newInstance();
-
-        setupToolbar();
-        determineType();
-
-        MainActivity.loadFragmentNoReturn(R.id.torrent_search_items_id, torrentFragment);
-
-
-        return view;
-    }
-
-    private void setupToolbar() {
-        MainActivity.getActivity().setSupportActionBar(toolbar);
-        ActionBar actionbar = MainActivity.getActivity().getSupportActionBar();
-        toolbar.setNavigationIcon(R.drawable.ic_view_headline_white_48dp);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(mainDrawer != null)
-                mainDrawer.openDrawer(GravityCompat.START,true);
-            }
-        });
-
-    }
-
-
-    private void determineType() {
-        switch (type) {
-            case general:
-                adjustLayoutForAll();
-                break;
-            case movie:
-                adjustLayoutForMovie();
-                break;
-            case tv:
-                adjustLayoutForTv();
-                break;
-            case software:
-                adjustLayoutForSoftware();
-                break;
-            case games:
-                adjustLayoutForGames();
-                break;
-        }
     }
 
     @Override
@@ -161,11 +105,95 @@ DrawerLayout mainDrawer;
     }
 
     @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        View view = inflater.inflate(R.layout.fragment_main_search, container, false);
+        toolbar = view.findViewById(R.id.toolbar);
+        drawerLayout = view.findViewById(R.id.drawer_layout_id);
+        navigationView = view.findViewById(R.id.navigation_view_id);
+        resolution = view.findViewById(R.id.resolution_spinner_id);
+        provider = view.findViewById(R.id.provider_spinner_id);
+        quality = view.findViewById(R.id.quality_spinner_id);
+        codec = view.findViewById(R.id.codec_spinner_id);
+        features = view.findViewById(R.id.features_spinner_id);
+        movieNavigationInclude = view.findViewById(R.id.movie_id);
+        tvNavigationInclude = view.findViewById(R.id.tv_id);
+        mAdView = view.findViewById(R.id.adView);
+
+        torrentFragment = TorrentFragment.newInstance();
+
+
+      //  loadAd();
+
+        setupToolbar();
+        determineType();
+
+        MainActivity.loadFragmentNoReturn(R.id.torrent_search_items_id, torrentFragment);
+
+
+        return view;
+    }
+
+    private void loadAd() {
+        MobileAds.initialize(getContext(), "ca-app-pub-9364776584437772~6544419095");
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+    }
+
+    /**
+     * first : set the support action bar for the activity
+     * sec : put the menu to open the left navigation bar
+     */
+    private void setupToolbar() {
+        MainActivity.getActivity().setSupportActionBar(toolbar);
+
+        toolbar.setNavigationIcon(R.drawable.ic_view_headline_white_48dp);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mainDrawer != null)
+                    mainDrawer.openDrawer(GravityCompat.START, true);
+            }
+        });
+
+    }
+
+
+    private void determineType() {
+        switch (type) {
+            case general:
+                adjustLayoutForAll();
+                break;
+            case movie:
+                adjustLayoutForMovie();
+                break;
+            case tv:
+                adjustLayoutForTv();
+                break;
+            case software:
+                adjustLayoutForSoftware();
+                break;
+            case games:
+                adjustLayoutForGames();
+                break;
+        }
+    }
+
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         return true;
     }
 
 
+    /**
+     * change the toolbar title
+     * lock or unlock the right navigation options
+     * set the category search
+     * disable all containers
+     * and reset the spinners
+     */
     private void adjustLayoutForAll() {
         toolbar.setTitle("General");
         drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
@@ -174,23 +202,46 @@ DrawerLayout mainDrawer;
         resetSpinners();
     }
 
+    /**
+     * change the toolbar title
+     * lock or unlock the right navigation options
+     * set the category search
+     * disable all containers
+     * and reset the spinners
+     */
     private void adjustLayoutForMovie() {
         toolbar.setTitle("Movies");
         movieNavigationInclude.setVisibility(View.VISIBLE);
         categorySearch = "&category=movie";
+        disableAllContainers();
+        resetSpinners();
         setupMovieContainer();
     }
 
-
+    /**
+     * change the toolbar title
+     * lock or unlock the right navigation options
+     * set the category search
+     * disable all containers
+     * and reset the spinners
+     */
     private void adjustLayoutForTv() {
         toolbar.setTitle("Tv Series");
         tvNavigationInclude.setVisibility(View.VISIBLE);
         categorySearch = "&category=show";
+        disableAllContainers();
+        resetSpinners();
         setupTvContainer();
 
     }
 
-
+    /**
+     * change the toolbar title
+     * lock or unlock the right navigation options
+     * set the category search
+     * disable all containers
+     * and reset the spinners
+     */
     private void adjustLayoutForGames() {
         toolbar.setTitle("Games");
         drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
@@ -200,6 +251,13 @@ DrawerLayout mainDrawer;
 
     }
 
+    /**
+     * change the toolbar title
+     * lock or unlock the right navigation options
+     * set the category search
+     * disable all containers
+     * and reset the spinners
+     */
     private void adjustLayoutForSoftware() {
         toolbar.setTitle("Software Torrents");
         drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
@@ -211,15 +269,14 @@ DrawerLayout mainDrawer;
 
 
     private void setupMovieContainer() {
-        disableAllContainers();
-        resetSpinners();
-        movieContainer.setVisibility(View.VISIBLE);
-        sort = movieContainer.findViewById(R.id.sort_spinner_id);
-        resolution = movieContainer.findViewById(R.id.resolution_spinner_id);
-        provider = movieContainer.findViewById(R.id.provider_spinner_id);
-        quality = movieContainer.findViewById(R.id.quality_spinner_id);
-        codec = movieContainer.findViewById(R.id.codec_spinner_id);
-        features = movieContainer.findViewById(R.id.features_spinner_id);
+
+        movieNavigationInclude.setVisibility(View.VISIBLE);
+        sort = movieNavigationInclude.findViewById(R.id.sort_spinner_id);
+        resolution = movieNavigationInclude.findViewById(R.id.resolution_spinner_id);
+        provider = movieNavigationInclude.findViewById(R.id.provider_spinner_id);
+        quality = movieNavigationInclude.findViewById(R.id.quality_spinner_id);
+        codec = movieNavigationInclude.findViewById(R.id.codec_spinner_id);
+        features = movieNavigationInclude.findViewById(R.id.features_spinner_id);
         setCodec();
         setFeatures();
         setProvider();
@@ -229,17 +286,16 @@ DrawerLayout mainDrawer;
     }
 
     private void setupTvContainer() {
-        disableAllContainers();
-        resetSpinners();
-        tvContainer.setVisibility(View.VISIBLE);
-        sort = tvContainer.findViewById(R.id.sort_spinner_id);
-        resolution = tvContainer.findViewById(R.id.resolution_spinner_id);
-        provider = tvContainer.findViewById(R.id.provider_spinner_id);
-        quality = tvContainer.findViewById(R.id.quality_spinner_id);
-        codec = tvContainer.findViewById(R.id.codec_spinner_id);
-        features = tvContainer.findViewById(R.id.features_spinner_id);
-        episode = tvContainer.findViewById(R.id.episode_spinner_id);
-        season = tvContainer.findViewById(R.id.seasons_spinner_id);
+
+        tvNavigationInclude.setVisibility(View.VISIBLE);
+        sort = tvNavigationInclude.findViewById(R.id.sort_spinner_id);
+        resolution = tvNavigationInclude.findViewById(R.id.resolution_spinner_id);
+        provider = tvNavigationInclude.findViewById(R.id.provider_spinner_id);
+        quality = tvNavigationInclude.findViewById(R.id.quality_spinner_id);
+        codec = tvNavigationInclude.findViewById(R.id.codec_spinner_id);
+        features = tvNavigationInclude.findViewById(R.id.features_spinner_id);
+        episode = tvNavigationInclude.findViewById(R.id.episode_spinner_id);
+        season = tvNavigationInclude.findViewById(R.id.seasons_spinner_id);
         setCodec();
         setFeatures();
         setProvider();
@@ -251,8 +307,8 @@ DrawerLayout mainDrawer;
     }
 
     private void disableAllContainers() {
-        movieContainer.setVisibility(View.GONE);
-        tvContainer.setVisibility(View.GONE);
+        movieNavigationInclude.setVisibility(View.GONE);
+        tvNavigationInclude.setVisibility(View.GONE);
     }
 
     private void resetSpinners() {
@@ -262,7 +318,7 @@ DrawerLayout mainDrawer;
         features = null;
         quality = null;
         resolution = null;
-        season= null;
+        season = null;
         episode = null;
     }
 
@@ -420,12 +476,11 @@ DrawerLayout mainDrawer;
     private void setSeason() {
         ArrayList<String> adapter = new ArrayList<>();
         adapter.add("All");
-        for(int i=1;i<30;i++)
-        {
-            String s="S";
-            if (i<10)
-                s+="0";
-            s+=String.valueOf(i);
+        for (int i = 1; i < 30; i++) {
+            String s = "S";
+            if (i < 10)
+                s += "0";
+            s += String.valueOf(i);
             adapter.add(s);
         }
 
@@ -446,12 +501,11 @@ DrawerLayout mainDrawer;
     private void setEpisode() {
         ArrayList<String> adapter = new ArrayList<>();
         adapter.add("All");
-        for(int i=1;i<30;i++)
-        {
-            String s="E";
-            if (i<10)
-                s+="0";
-            s+=String.valueOf(i);
+        for (int i = 1; i < 30; i++) {
+            String s = "E";
+            if (i < 10)
+                s += "0";
+            s += String.valueOf(i);
             adapter.add(s);
         }
 
@@ -476,8 +530,8 @@ DrawerLayout mainDrawer;
         String mcodec = "";
         String mfeatures = "";
         String mSort = "";
-        String mSeason ="";
-        String mEpisode ="";
+        String mSeason = "";
+        String mEpisode = "";
 
         if (sort != null)
             if (sort.getItems().get(sort.getSelectedIndex()).toString().equals("Relevance"))
@@ -518,7 +572,7 @@ DrawerLayout mainDrawer;
 
 
         String searchString = searchView.getQuery().toString() + mresolution + mquality + mcodec + mprovider + mfeatures;
-        torrentFragment.search(searchString+" "+mSeason+mEpisode + categorySearch + mSort);
+        torrentFragment.search(searchString + " " + mSeason + mEpisode + categorySearch + mSort);
     }
 
 
