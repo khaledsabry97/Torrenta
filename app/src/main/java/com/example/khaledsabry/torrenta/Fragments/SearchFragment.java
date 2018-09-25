@@ -18,7 +18,6 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
 import com.example.khaledsabry.torrenta.Enums.Type;
-import com.example.khaledsabry.torrenta.Interface.OnChange;
 import com.example.khaledsabry.torrenta.MainActivity;
 import com.example.khaledsabry.torrenta.R;
 import com.google.android.gms.ads.AdRequest;
@@ -59,9 +58,13 @@ public class SearchFragment extends Fragment {
     //enum type to determine how the right navigation will react
     public static Type type;
     //the navigation bar of spinners for movie
-    View movieNavigationInclude;
+    View movieNavigation;
     //the navigation bar of spinners for tv series
-    View tvNavigationInclude;
+    View tvNavigation;
+    //the navigation bar of spinners for general,games and software
+    View generalNavigation;
+    //take the visible navigation right
+    View activeRightNavigation;
     //reference object to the ad
     AdView mAdView;
 
@@ -117,14 +120,15 @@ public class SearchFragment extends Fragment {
         quality = view.findViewById(R.id.quality_spinner_id);
         codec = view.findViewById(R.id.codec_spinner_id);
         features = view.findViewById(R.id.features_spinner_id);
-        movieNavigationInclude = view.findViewById(R.id.movie_id);
-        tvNavigationInclude = view.findViewById(R.id.tv_id);
+        movieNavigation = view.findViewById(R.id.movie_id);
+        tvNavigation = view.findViewById(R.id.tv_id);
+        generalNavigation = view.findViewById(R.id.general_id);
         mAdView = view.findViewById(R.id.adView);
 
         torrentFragment = TorrentFragment.newInstance();
 
 
-      //  loadAd();
+        //  loadAd();
 
         setupToolbar();
         determineType();
@@ -171,6 +175,9 @@ public class SearchFragment extends Fragment {
             case tv:
                 adjustLayoutForTv();
                 break;
+            case music:
+                adjustLayoutForMusic();
+                break;
             case software:
                 adjustLayoutForSoftware();
                 break;
@@ -195,11 +202,11 @@ public class SearchFragment extends Fragment {
      * and reset the spinners
      */
     private void adjustLayoutForAll() {
+        activateRightNavigation(generalNavigation);
         toolbar.setTitle("General");
-        drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
         categorySearch = "";
-        disableAllContainers();
-        resetSpinners();
+
+        setSort();
     }
 
     /**
@@ -210,12 +217,17 @@ public class SearchFragment extends Fragment {
      * and reset the spinners
      */
     private void adjustLayoutForMovie() {
+        activateRightNavigation(movieNavigation);
+
         toolbar.setTitle("Movies");
-        movieNavigationInclude.setVisibility(View.VISIBLE);
         categorySearch = "&category=movie";
-        disableAllContainers();
-        resetSpinners();
-        setupMovieContainer();
+
+        setCodec();
+        setFeatures();
+        setProvider();
+        setQuality();
+        setResolution();
+        setSort();
     }
 
     /**
@@ -226,14 +238,31 @@ public class SearchFragment extends Fragment {
      * and reset the spinners
      */
     private void adjustLayoutForTv() {
+        activateRightNavigation(tvNavigation);
+
         toolbar.setTitle("Tv Series");
-        tvNavigationInclude.setVisibility(View.VISIBLE);
         categorySearch = "&category=show";
-        disableAllContainers();
-        resetSpinners();
-        setupTvContainer();
+
+        setCodec();
+        setFeatures();
+        setProvider();
+        setQuality();
+        setResolution();
+        setSort();
+        setSeason();
+        setEpisode();
 
     }
+
+    private void adjustLayoutForMusic() {
+        activateRightNavigation(generalNavigation);
+        toolbar.setTitle("Music");
+        categorySearch = "&category=album";
+
+        setSort();
+
+    }
+
 
     /**
      * change the toolbar title
@@ -243,11 +272,11 @@ public class SearchFragment extends Fragment {
      * and reset the spinners
      */
     private void adjustLayoutForGames() {
+        activateRightNavigation(generalNavigation);
+
         toolbar.setTitle("Games");
-        drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
         categorySearch = "&type=games";
-        disableAllContainers();
-        resetSpinners();
+        setSort();
 
     }
 
@@ -259,56 +288,23 @@ public class SearchFragment extends Fragment {
      * and reset the spinners
      */
     private void adjustLayoutForSoftware() {
+        activateRightNavigation(generalNavigation);
+
         toolbar.setTitle("Software Torrents");
-        drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
         categorySearch = "&type=software";
-        disableAllContainers();
+        
+        setSort();
+    }
+
+
+    private void activateRightNavigation(View navigation) {
+        movieNavigation.setVisibility(View.GONE);
+        tvNavigation.setVisibility(View.GONE);
+        generalNavigation.setVisibility(View.GONE);
+
+        activeRightNavigation = navigation;
+        activeRightNavigation.setVisibility(View.VISIBLE);
         resetSpinners();
-
-    }
-
-
-    private void setupMovieContainer() {
-
-        movieNavigationInclude.setVisibility(View.VISIBLE);
-        sort = movieNavigationInclude.findViewById(R.id.sort_spinner_id);
-        resolution = movieNavigationInclude.findViewById(R.id.resolution_spinner_id);
-        provider = movieNavigationInclude.findViewById(R.id.provider_spinner_id);
-        quality = movieNavigationInclude.findViewById(R.id.quality_spinner_id);
-        codec = movieNavigationInclude.findViewById(R.id.codec_spinner_id);
-        features = movieNavigationInclude.findViewById(R.id.features_spinner_id);
-        setCodec();
-        setFeatures();
-        setProvider();
-        setQuality();
-        setResolution();
-        setSort();
-    }
-
-    private void setupTvContainer() {
-
-        tvNavigationInclude.setVisibility(View.VISIBLE);
-        sort = tvNavigationInclude.findViewById(R.id.sort_spinner_id);
-        resolution = tvNavigationInclude.findViewById(R.id.resolution_spinner_id);
-        provider = tvNavigationInclude.findViewById(R.id.provider_spinner_id);
-        quality = tvNavigationInclude.findViewById(R.id.quality_spinner_id);
-        codec = tvNavigationInclude.findViewById(R.id.codec_spinner_id);
-        features = tvNavigationInclude.findViewById(R.id.features_spinner_id);
-        episode = tvNavigationInclude.findViewById(R.id.episode_spinner_id);
-        season = tvNavigationInclude.findViewById(R.id.seasons_spinner_id);
-        setCodec();
-        setFeatures();
-        setProvider();
-        setQuality();
-        setResolution();
-        setSort();
-        setSeason();
-        setEpisode();
-    }
-
-    private void disableAllContainers() {
-        movieNavigationInclude.setVisibility(View.GONE);
-        tvNavigationInclude.setVisibility(View.GONE);
     }
 
     private void resetSpinners() {
@@ -326,6 +322,8 @@ public class SearchFragment extends Fragment {
      * set the different types of sort
      */
     private void setSort() {
+        sort = activeRightNavigation.findViewById(R.id.sort_spinner_id);
+
         ArrayList<String> adapter = new ArrayList<>();
 
         adapter.add("Relevance");
@@ -347,6 +345,8 @@ public class SearchFragment extends Fragment {
      * set the different types of codecs
      */
     private void setCodec() {
+        codec = activeRightNavigation.findViewById(R.id.codec_spinner_id);
+
         ArrayList<String> adapter = new ArrayList<>();
 
         adapter.add("All");
@@ -369,6 +369,8 @@ public class SearchFragment extends Fragment {
      * set the different types of providers
      */
     private void setProvider() {
+        provider = activeRightNavigation.findViewById(R.id.provider_spinner_id);
+
         ArrayList<String> adapter = new ArrayList<>();
         adapter.add("All");
         adapter.add("PSA");
@@ -396,6 +398,8 @@ public class SearchFragment extends Fragment {
      * set the different types of qualities
      */
     private void setQuality() {
+        quality = activeRightNavigation.findViewById(R.id.quality_spinner_id);
+
         ArrayList<String> adapter = new ArrayList<>();
         adapter.add("All");
         adapter.add("BluRay");
@@ -430,6 +434,7 @@ public class SearchFragment extends Fragment {
      * set the differnet types of resolutions
      */
     private void setResolution() {
+        resolution = activeRightNavigation.findViewById(R.id.resolution_spinner_id);
 
         ArrayList<String> adapter = new ArrayList<>();
         adapter.add("All");
@@ -451,6 +456,8 @@ public class SearchFragment extends Fragment {
      * set the different types of features
      */
     private void setFeatures() {
+        features = activeRightNavigation.findViewById(R.id.features_spinner_id);
+
         ArrayList<String> adapter = new ArrayList<>();
 
         adapter.add("None");
@@ -474,6 +481,8 @@ public class SearchFragment extends Fragment {
      * set the different types of seasons
      */
     private void setSeason() {
+        season = activeRightNavigation.findViewById(R.id.seasons_spinner_id);
+
         ArrayList<String> adapter = new ArrayList<>();
         adapter.add("All");
         for (int i = 1; i < 30; i++) {
@@ -499,6 +508,8 @@ public class SearchFragment extends Fragment {
      * set the different types of episodes
      */
     private void setEpisode() {
+        episode = activeRightNavigation.findViewById(R.id.episode_spinner_id);
+
         ArrayList<String> adapter = new ArrayList<>();
         adapter.add("All");
         for (int i = 1; i < 30; i++) {

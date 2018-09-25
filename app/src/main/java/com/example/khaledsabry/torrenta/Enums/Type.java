@@ -5,6 +5,7 @@ public enum Type {
     general,
     movie,
     tv,
+    music,
     software,
     games,
     history,

@@ -17,6 +17,10 @@
         android:id="@+id/movie_id"
         android:title="@string/movies"></item>
 
+        <item
+            android:id="@+id/music_id"
+            android:title="@string/music"></item>
+
     <item
         android:id="@+id/tv_id"
         android:title="@string/tv_series"></item>

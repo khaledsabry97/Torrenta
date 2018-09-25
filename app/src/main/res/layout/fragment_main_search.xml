@@ -76,6 +76,11 @@
                     android:id="@+id/tv_id"
                     layout="@layout/view_torrent_tv_options"
                     android:visibility="gone"></include>
+
+                <include
+                    android:id="@+id/general_id"
+                    layout="@layout/view_torrent_general_options"
+                    android:visibility="gone"></include>
             </android.support.design.widget.NavigationView>
         </android.support.v4.widget.DrawerLayout>
 
