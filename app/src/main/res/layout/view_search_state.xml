@@ -11,9 +11,9 @@
     android:layout_centerInParent="true">
     <ImageView
         android:id="@+id/data_id"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-       android:src="@drawable/ic_warning_white_48dp" />
+        android:layout_width="@dimen/_20sdp"
+        android:layout_height="@dimen/_20sdp"
+       android:src="@drawable/search_in_database" />
 
     <TextView
         android:id="@+id/result_text_id"
@@ -22,6 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_toRightOf="@+id/data_id"
+        android:layout_marginLeft="@dimen/_3sdp"
         tools:text="No Torrents Found" />
 
 </RelativeLayout>

@@ -292,7 +292,7 @@ public class SearchFragment extends Fragment {
 
         toolbar.setTitle("Software Torrents");
         categorySearch = "&type=software";
-        
+
         setSort();
     }
 

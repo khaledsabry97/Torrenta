@@ -15,6 +15,7 @@
 
     <item
         android:id="@+id/movie_id"
+        android:icon="@drawable/movie"
         android:title="@string/movies"></item>
 
         <item
@@ -23,15 +24,18 @@
 
     <item
         android:id="@+id/tv_id"
+        android:icon="@drawable/tv_series"
         android:title="@string/tv_series"></item>
 
     <item
         android:id="@+id/games_id"
+        android:icon="@drawable/games"
         android:title="@string/games"></item>
 
 
         <item
             android:id="@+id/software_id"
+            android:icon="@drawable/apps"
             android:title="@string/apps" />
 
     </group>
@@ -44,6 +48,7 @@
 
     <item
         android:id="@+id/history_id"
+        android:icon="@drawable/download"
         android:title="@string/history"></item>
 
 
