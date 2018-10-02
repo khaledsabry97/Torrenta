@@ -17,7 +17,6 @@ import com.example.khaledsabry.torrenta.Controllers.HistoryController;
 import com.example.khaledsabry.torrenta.Controllers.TorrentController;
 import com.example.khaledsabry.torrenta.Interface.OnSuccess;
 import com.example.khaledsabry.torrenta.Interface.OnWebSuccess;
-import com.example.khaledsabry.torrenta.Interface.OnChange;
 import com.example.khaledsabry.torrenta.R;
 import com.example.khaledsabry.torrenta.items.Torrent;
 import com.github.ybq.android.spinkit.style.Wave;

@@ -6,7 +6,9 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import com.example.khaledsabry.torrenta.MainActivity;
 
-
+/**
+ * this class for creating and updating the database and the structure of the database
+ */
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     public static final String databaseName = "Torrenta.db";
@@ -14,7 +16,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     DatabaseTables.History history = new DatabaseTables.History();
 
 
-    //quoutes that is used to let the query function correctly
+    //quotes that is used to let the query function correctly
     static String quote = "\"";
     public final String createDataBaseSql = "CREATE TABLE "+ history.tableName+"(\n" +
             history.id+" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,\n" +
@@ -44,9 +46,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
         //pass drop the tables
-        db.execSQL(createDataBaseSql);
+        db.execSQL(deleteDataBaseSql);
         onCreate(db);
     }
 
-    
+
+    @Override
+    public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        db.execSQL(deleteDataBaseSql);
+        onCreate(db);
+    }
 }

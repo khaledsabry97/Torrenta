@@ -159,13 +159,15 @@ public class TorrentAdapter extends RecyclerView.Adapter<TorrentAdapter.TorrentV
             return null;
         }
 
-
+        /**
+         * add to history in your local database
+         */
         void addToHistory() {
             if(SearchFragment.type == null)
                 return;
             switch (SearchFragment.type) {
                 case general:
-                    historyController.addAllToHistory(name, sizes, this);
+                    historyController.addGeneralToHistory(name, sizes, this);
                     break;
                 case movie:
                     historyController.addMovieToHistory(name, sizes, this);

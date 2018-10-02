@@ -32,8 +32,8 @@
                 <android.support.v7.widget.Toolbar
                     android:id="@+id/toolbar"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/toolbar_color"
+                    android:layout_height="@dimen/_32sdp"
+                    android:background="@drawable/toolbar_color"
                     android:theme="@style/ToolbarTheme"
                     app:titleTextAppearance="@style/TextCategory"
                     android:fitsSystemWindows="true"
@@ -52,10 +52,11 @@
                     android:id="@+id/adView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:layout_alignParentBottom="true"
                     android:layout_centerHorizontal="true"
                     ads:adSize="BANNER"
-                    android:visibility="gone"
+                    android:visibility="visible"
                     ads:adUnitId="@string/banner_ad_unit_id"></com.google.android.gms.ads.AdView>
 
             </LinearLayout>

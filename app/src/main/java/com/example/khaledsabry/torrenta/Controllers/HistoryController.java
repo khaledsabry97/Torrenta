@@ -23,7 +23,13 @@ private OnSuccess.bool listener = new OnSuccess.bool() {
     }
 };
 
-    public void addAllToHistory(String name,String size, final OnSuccess.bool listener)
+    /**
+     * these functions to add to history in the local database according to its type
+     * @param name of the torrent
+     * @param size of the torrent
+     * @param listener to call it back if the operation is succeed = true else = false
+     */
+    public void addGeneralToHistory(String name, String size, final OnSuccess.bool listener)
     {
         this.listener = listener;
         databaseController.insertController().AddHistory(name,size, general, this);
@@ -62,8 +68,14 @@ private OnSuccess.bool listener = new OnSuccess.bool() {
 
     }
 
+    /**/
 
-    public void getAllHistory(final OnSuccess.array listener)
+
+    /**
+     * these function is to get every type from the database
+     * @param listener to get back list of torrents in an array
+     */
+    public void getGeneralHistory(final OnSuccess.array listener)
     {
         AsyncTask.execute(new Runnable() {
             @Override
@@ -169,8 +181,14 @@ private OnSuccess.bool listener = new OnSuccess.bool() {
         });
     }
 
+/**/
 
 
+    /**
+     * converts the json object array that come from the database into an array of history items
+     * @param jsonObjects the objects from the database
+     * @return array list of history items
+     */
     private ArrayList<HistoryItem> setJsonsToHistoryItem(ArrayList<JSONObject> jsonObjects)
     {
         ArrayList<HistoryItem> historyItems = new ArrayList<>();
@@ -199,7 +217,10 @@ private OnSuccess.bool listener = new OnSuccess.bool() {
     }
 
 
-
+    /**
+     * delete item from the history
+     * @param id of the torrent history item
+     */
     public void deleteHistoryItem(final String id)
     {
         AsyncTask.execute(new Runnable() {

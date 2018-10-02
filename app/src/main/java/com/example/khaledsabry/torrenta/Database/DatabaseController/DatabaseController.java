@@ -190,11 +190,6 @@ protected DatabaseTables.History history = new DatabaseTables.History();
     }
 
 
-    protected DatabaseTables databaseTables() {
-        return new DatabaseTables();
-    }
-
-
     protected SQLiteDatabase getWritableDatabase() {
         SQLiteDatabase db = databaseHelper.getWritableDatabase();
         return db;

@@ -27,7 +27,7 @@
 
 
 
-    <color name="toolbar_color">@color/blue_dark</color>
+    <drawable name="toolbar_color">@drawable/blue</drawable>
     <color name="title_download_bar">@color/red_dark</color>
     <color name="navigation_main">@color/gray_dark</color>
     <color name="navigation_sub">@color/brownandblack</color>

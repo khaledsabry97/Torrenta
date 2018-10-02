@@ -91,6 +91,16 @@ public class SearchFragment extends Fragment {
 
         MenuItem menuItem = menu.findItem(R.id.app_bar_search);
         searchView = (SearchView) menuItem.getActionView();
+
+        menuItem = menu.findItem(R.id.options_id);
+        menuItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                if(drawerLayout != null)
+                drawerLayout.openDrawer(GravityCompat.END,true);
+                return true;
+            }
+        });
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -128,7 +138,7 @@ public class SearchFragment extends Fragment {
         torrentFragment = TorrentFragment.newInstance();
 
 
-        //  loadAd();
+          loadAd();
 
         setupToolbar();
         determineType();
@@ -425,7 +435,7 @@ public class SearchFragment extends Fragment {
         quality.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MainActivity.getActivity().hideSystemUI();
+       //         MainActivity.getActivity().hideSystemUI();
             }
         });
     }

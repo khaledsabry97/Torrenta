@@ -6,7 +6,6 @@ public class Torrent {
     private String size;
     private String seeders;
     private String leechers;
-    private String quailty;
     private String sourceName;
     private String date;
 
@@ -48,14 +47,6 @@ public class Torrent {
 
     public void setLeechers(String leechers) {
         this.leechers = leechers;
-    }
-
-    public String getQuailty() {
-        return quailty;
-    }
-
-    public void setQuailty(String quailty) {
-        this.quailty = quailty;
     }
 
     public String getSourceName() {

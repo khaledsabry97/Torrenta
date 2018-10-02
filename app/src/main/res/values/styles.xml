@@ -163,5 +163,7 @@
     <style name="ToolbarTheme" parent="ThemeOverlay.AppCompat.Light">
         <item name="android:fontFamily">@font/carterone</item>
         <item name="android:textColor">@color/white</item>
+        <item name="android:textColorSecondary">@color/white</item>
+        <item name="android:textColorTertiary">@color/white</item>
     </style>
 </resources>

@@ -39,7 +39,7 @@ public class HistoryFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_history, container, false);
         tabLayout = view.findViewById(R.id.tab_layout_id);
-recyclerView = view.findViewById(R.id.recycler_id);
+        recyclerView = view.findViewById(R.id.recycler_id);
         historyAdapter = new HistoryAdapter();
         historyController = new HistoryController();
         setupTabLayout();
@@ -77,7 +77,7 @@ recyclerView = view.findViewById(R.id.recycler_id);
     private void selectTab(int index) {
         switch (index) {
             case 0:
-                historyController.getAllHistory(new OnSuccess.array() {
+                historyController.getGeneralHistory(new OnSuccess.array() {
                     @Override
                     public void onSuccess(ArrayList<Object> historyItems) {
                         historyAdapter.setItems((ArrayList<HistoryItem>) (Object) historyItems);
