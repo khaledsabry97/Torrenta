@@ -1,14 +1,9 @@
 package com.example.khaledsabry.torrenta;
 
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
 
 import com.example.khaledsabry.torrenta.Fragments.MainFragment;
-
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -32,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
+if(savedInstanceState == null)
         loadFragmentWithReturn(R.id.main_container, mainFragment);
 
     }
@@ -40,7 +35,6 @@ public class MainActivity extends AppCompatActivity {
 
     //load fragment with ability to return
     public static void loadFragmentWithReturn(int idContainer, android.support.v4.app.Fragment fragment) {
-
         MainActivity.getActivity().getSupportFragmentManager().beginTransaction().replace(idContainer, fragment).addToBackStack(null).commit();
     }
 
@@ -50,7 +44,6 @@ public class MainActivity extends AppCompatActivity {
 
         MainActivity.getActivity().getSupportFragmentManager().beginTransaction().replace(idContainer, fragment).commit();
     }
-
 
 
 }

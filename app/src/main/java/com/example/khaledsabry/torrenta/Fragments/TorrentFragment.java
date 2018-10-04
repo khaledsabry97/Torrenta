@@ -2,6 +2,8 @@ package com.example.khaledsabry.torrenta.Fragments;
 
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -21,6 +23,7 @@ import com.example.khaledsabry.torrenta.R;
 import com.example.khaledsabry.torrenta.items.Torrent;
 import com.github.ybq.android.spinkit.style.Wave;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 
@@ -41,6 +44,22 @@ public class TorrentFragment extends Fragment implements OnSuccess.bool {
 
     ArrayList<Torrent> torrents;
 ProgressBar progressBar;
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putSerializable("t", (Serializable) torrents);
+
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if(savedInstanceState == null)
+            return;
+        torrents = (ArrayList<Torrent>) savedInstanceState.getSerializable("t");
+    }
+
     public static TorrentFragment newInstance() {
         TorrentFragment fragment = new TorrentFragment();
         return fragment;
@@ -57,10 +76,11 @@ ProgressBar progressBar;
         searchTextState = searchState.findViewById(R.id.result_text_id);
         historyController = new HistoryController();
         torrentController = new TorrentController();
-        NavigationView navigationView;
         progressBar.setIndeterminateDrawable(new Wave());
         progressBar.setVisibility(View.GONE);
         setupRecyclerView();
+
+
 
         return view;
     }
@@ -75,6 +95,9 @@ ProgressBar progressBar;
         linearLayoutManager.setSmoothScrollbarEnabled(true);
         recyclerView.setLayoutManager(linearLayoutManager);
         torrentAdapter.setTorrents(torrents);
+        if(torrents != null)
+            searchFound();
+        else
         noSearchText();
 
     }

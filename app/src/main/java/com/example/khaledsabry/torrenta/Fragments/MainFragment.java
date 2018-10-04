@@ -3,6 +3,7 @@ package com.example.khaledsabry.torrenta.Fragments;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
@@ -19,11 +20,12 @@ import com.example.khaledsabry.torrenta.R;
 
 public class MainFragment extends Fragment {
 
-    DrawerLayout drawerLayout;
+   public static DrawerLayout drawerLayout;
     NavigationView navigationView;
-    public Type type;
+    public Type type = Type.general;
+    int id;
 
-    int id = -1;
+    Bundle savedInstance;
 
     public static MainFragment newInstance() {
         MainFragment fragment = new MainFragment();
@@ -31,6 +33,23 @@ public class MainFragment extends Fragment {
         return fragment;
     }
 
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putSerializable("type", type);
+        outState.putSerializable("index", id);
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (savedInstanceState == null)
+            return;
+        type = (Type) savedInstanceState.getSerializable("type");
+        id = (int) savedInstanceState.getSerializable("index");
+
+
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -39,7 +58,7 @@ public class MainFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_main, container, false);
         drawerLayout = view.findViewById(R.id.drawer_layout_id);
         navigationView = view.findViewById(R.id.navigation_view_id);
-
+        savedInstance = savedInstanceState;
         setNavigationView();
         return view;
     }
@@ -57,31 +76,36 @@ public class MainFragment extends Fragment {
             }
         });
 
-
-        selectIndex(R.id.general_id);
+        if (savedInstance == null)
+            selectIndex(R.id.general_id);
     }
 
     void selectIndex(int id) {
+        this.id = id;
         switch (id) {
             case R.id.general_id:
                 type = Type.general;
-                MainActivity.loadFragmentNoReturn(R.id.main_frame, SearchFragment.newInstance(type,drawerLayout));
+                MainActivity.loadFragmentNoReturn(R.id.main_frame, SearchFragment.newInstance(type));
                 break;
             case R.id.movie_id:
                 type = Type.movie;
-                MainActivity.loadFragmentNoReturn(R.id.main_frame, SearchFragment.newInstance(type,drawerLayout));
+                MainActivity.loadFragmentNoReturn(R.id.main_frame, SearchFragment.newInstance(type));
+                break;
+            case R.id.music_id:
+                type = Type.music;
+                MainActivity.loadFragmentNoReturn(R.id.main_frame, SearchFragment.newInstance(type));
                 break;
             case R.id.tv_id:
                 type = Type.tv;
-                MainActivity.loadFragmentNoReturn(R.id.main_frame, SearchFragment.newInstance(type,drawerLayout));
+                MainActivity.loadFragmentNoReturn(R.id.main_frame, SearchFragment.newInstance(type));
                 break;
             case R.id.games_id:
                 type = Type.games;
-                MainActivity.loadFragmentNoReturn(R.id.main_frame, SearchFragment.newInstance(type,drawerLayout));
+                MainActivity.loadFragmentNoReturn(R.id.main_frame, SearchFragment.newInstance(type));
                 break;
             case R.id.software_id:
                 type = Type.software;
-                MainActivity.loadFragmentNoReturn(R.id.main_frame, SearchFragment.newInstance(type,drawerLayout));
+                MainActivity.loadFragmentNoReturn(R.id.main_frame, SearchFragment.newInstance(type));
                 break;
             case R.id.history_id:
                 type = Type.history;
@@ -94,8 +118,6 @@ public class MainFragment extends Fragment {
 
         }
     }
-
-
 
 
 }

@@ -16,7 +16,6 @@
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="ca-app-pub-9364776584437772~6544419095"/>
         <activity android:name=".MainActivity"
-            android:screenOrientation="sensorPortrait"
             >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -27,3 +26,4 @@
     </application>
 
 </manifest>
+    <!-- android:screenOrientation="sensorPortrait"-->

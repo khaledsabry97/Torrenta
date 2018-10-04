@@ -2,6 +2,7 @@ package com.example.khaledsabry.torrenta.Fragments;
 
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -71,17 +72,30 @@ public class SearchFragment extends Fragment {
     ProgressBar progressBar;
 
 
-    public static SearchFragment newInstance(Type type, DrawerLayout drawerLayout) {
-        SearchFragment fragment = new SearchFragment();
-        fragment.type = type;
-        fragment.mainDrawer = drawerLayout;
-        return fragment;
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        MainActivity.getActivity().getSupportFragmentManager().putFragment(outState, "torrentFragment", torrentFragment);
     }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+
+        if (savedInstanceState == null)
+            return;
+
+        torrentFragment = (TorrentFragment) MainActivity.getActivity().getSupportFragmentManager().getFragment(savedInstanceState, "torrentFragment");
+
+
+    }
+
+
+    public static SearchFragment newInstance(Type type) {
+        SearchFragment fragment = new SearchFragment();
+        fragment.type = type;
+        return fragment;
     }
 
     @Override
@@ -96,8 +110,8 @@ public class SearchFragment extends Fragment {
         menuItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
-                if(drawerLayout != null)
-                drawerLayout.openDrawer(GravityCompat.END,true);
+                if (drawerLayout != null)
+                    drawerLayout.openDrawer(GravityCompat.END, true);
                 return true;
             }
         });
@@ -134,19 +148,24 @@ public class SearchFragment extends Fragment {
         tvNavigation = view.findViewById(R.id.tv_id);
         generalNavigation = view.findViewById(R.id.general_id);
         mAdView = view.findViewById(R.id.adView);
+        mainDrawer = MainFragment.drawerLayout;
 
-        torrentFragment = TorrentFragment.newInstance();
 
-
-          loadAd();
+        loadTorrentFragment();
+        loadAd();
 
         setupToolbar();
         determineType();
 
-        MainActivity.loadFragmentNoReturn(R.id.torrent_search_items_id, torrentFragment);
-
 
         return view;
+    }
+
+    private void loadTorrentFragment() {
+        if (torrentFragment == null) {
+            torrentFragment = TorrentFragment.newInstance();
+            MainActivity.loadFragmentNoReturn(R.id.torrent_search_items_id, torrentFragment);
+        }
     }
 
     private void loadAd() {
@@ -435,7 +454,7 @@ public class SearchFragment extends Fragment {
         quality.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-       //         MainActivity.getActivity().hideSystemUI();
+                //         MainActivity.getActivity().hideSystemUI();
             }
         });
     }

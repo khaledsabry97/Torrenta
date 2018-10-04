@@ -94,9 +94,9 @@
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recycler_id"
-            android:background="@color/gray_dark"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@color/gray_dark"
             tools:listitem="@layout/cardview_torrent" />
 
         <include
@@ -108,9 +108,9 @@
 
         <include
             android:id="@+id/view_progress_id"
+            layout="@layout/view_progress_bar"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            layout="@layout/view_progress_bar"></include>
+            android:layout_height="match_parent"></include>
 
     </LinearLayout>
 </FrameLayout>
