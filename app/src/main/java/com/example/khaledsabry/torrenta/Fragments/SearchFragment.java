@@ -181,7 +181,7 @@ public class SearchFragment extends Fragment {
     private void setupToolbar() {
         MainActivity.getActivity().setSupportActionBar(toolbar);
 
-        toolbar.setNavigationIcon(R.drawable.ic_view_headline_white_48dp);
+        toolbar.setNavigationIcon(R.drawable.ic_menu_black_24dp);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

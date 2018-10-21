@@ -29,41 +29,41 @@ private OnSuccess.bool listener = new OnSuccess.bool() {
      * @param size of the torrent
      * @param listener to call it back if the operation is succeed = true else = false
      */
-    public void addGeneralToHistory(String name, String size, final OnSuccess.bool listener)
+    public void addGeneralToHistory(String name,String magnet, String size, final OnSuccess.bool listener)
     {
         this.listener = listener;
-        databaseController.insertController().AddHistory(name,size, general, this);
+        databaseController.insertController().AddHistory(name,magnet,size, general, this);
 
 
     }
-    public void addMovieToHistory(String name,String size, final OnSuccess.bool listener)
+    public void addMovieToHistory(String name,String magnet, String size, final OnSuccess.bool listener)
     {
         this.listener = listener;
 
-        databaseController.insertController().AddHistory(name,size, movie, this);
-
-
-    }
-
-    public void addTvToHistory(String name,String size, final OnSuccess.bool listener)
-    {
-        this.listener = listener;
-        databaseController.insertController().AddHistory(name,size, tv, this);
-
-    }
-
-    public void addGamesToHistory(String name,String size, final OnSuccess.bool listener)
-    {
-        this.listener = listener;
-        databaseController.insertController().AddHistory(name,size, games, this);
+        databaseController.insertController().AddHistory(name,magnet,size, movie, this);
 
 
     }
 
-    public void addSoftwareToHistory(String name,String size, final OnSuccess.bool listener)
+    public void addTvToHistory(String name,String magnet, String size, final OnSuccess.bool listener)
     {
         this.listener = listener;
-        databaseController.insertController().AddHistory(name,size, software, this);
+        databaseController.insertController().AddHistory(name,magnet,size, tv, this);
+
+    }
+
+    public void addGamesToHistory(String name,String magnet, String size, final OnSuccess.bool listener)
+    {
+        this.listener = listener;
+        databaseController.insertController().AddHistory(name,magnet,size, games, this);
+
+
+    }
+
+    public void addSoftwareToHistory(String name,String magnet, String size, final OnSuccess.bool listener)
+    {
+        this.listener = listener;
+        databaseController.insertController().AddHistory(name,magnet,size, software, this);
 
 
     }
@@ -201,6 +201,7 @@ private OnSuccess.bool listener = new OnSuccess.bool() {
            item.setName(jsonObject.getString(Functions.removeQoutes(history.name)));
            item.setDate(jsonObject.getString(Functions.removeQoutes(history.date)));
            item.setSize(jsonObject.getString(Functions.removeQoutes(history.size)));
+           item.setMagnet(jsonObject.getString(Functions.removeQoutes(history.magnet)));
 
 
            historyItems.add(item);

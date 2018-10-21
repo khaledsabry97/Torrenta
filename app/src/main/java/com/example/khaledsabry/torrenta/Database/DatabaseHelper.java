@@ -12,7 +12,7 @@ import com.example.khaledsabry.torrenta.MainActivity;
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     public static final String databaseName = "Torrenta.db";
-    public static final int databaseVersion = 1;
+    public static final int databaseVersion = 2;
     DatabaseTables.History history = new DatabaseTables.History();
 
 
@@ -21,6 +21,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public final String createDataBaseSql = "CREATE TABLE "+ history.tableName+"(\n" +
             history.id+" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,\n" +
             history.name+" TEXT,\n" +
+            history.magnet+"Text, \n"+
             history.size +" TEXT, \n"+
             history.type+" integer,\n" +
             history.date+" TEXT NOT NULL\n" +

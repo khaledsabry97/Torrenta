@@ -7,7 +7,15 @@ public class HistoryItem {
     private String date;
     private String size;
     private String files;
+    private String magnet;
 
+    public String getMagnet() {
+        return magnet;
+    }
+
+    public void setMagnet(String magnet) {
+        this.magnet = magnet;
+    }
 
     public String getId() {
         return id;

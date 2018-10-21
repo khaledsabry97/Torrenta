@@ -9,6 +9,7 @@ public class DatabaseTables {
         public final String type = "`type`";
         public final String date = "`date`";
         public final String size = "`size`";
+        public final String magnet = "`magnet`";
 
         public final int constantAll = 0;
         public final int constantMovie = 1;

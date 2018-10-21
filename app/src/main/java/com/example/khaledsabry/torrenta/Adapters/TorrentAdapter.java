@@ -75,7 +75,7 @@ public class TorrentAdapter extends RecyclerView.Adapter<TorrentAdapter.TorrentV
         TextView date;
         CardView cardView;
 
-        String name, sizes;
+        String name, sizes,magnets;
 
         public TorrentViewHolder(View itemView) {
             super(itemView);
@@ -100,8 +100,12 @@ public class TorrentAdapter extends RecyclerView.Adapter<TorrentAdapter.TorrentV
                 @Override
                 public void onClick(View v) {
                     String magnet = torrent.getMagnet();
+
+                    //global variables to use it later for history
                     name = title.getText().toString();
                     sizes = size.getText().toString();
+                    magnets = magnet;
+
                     readyAndDownload(magnet);
                 }
             });
@@ -167,19 +171,19 @@ public class TorrentAdapter extends RecyclerView.Adapter<TorrentAdapter.TorrentV
                 return;
             switch (SearchFragment.type) {
                 case general:
-                    historyController.addGeneralToHistory(name, sizes, this);
+                    historyController.addGeneralToHistory(name,magnets, sizes, this);
                     break;
                 case movie:
-                    historyController.addMovieToHistory(name, sizes, this);
+                    historyController.addMovieToHistory(name,magnets, sizes, this);
                     break;
                 case tv:
-                    historyController.addTvToHistory(name, sizes, this);
+                    historyController.addTvToHistory(name,magnets, sizes, this);
                     break;
                 case games:
-                    historyController.addGamesToHistory(name, sizes, this);
+                    historyController.addGamesToHistory(name,magnets, sizes, this);
                     break;
                 case software:
-                    historyController.addSoftwareToHistory(name, sizes, this);
+                    historyController.addSoftwareToHistory(name,magnets, sizes, this);
                     break;
             }
         }
