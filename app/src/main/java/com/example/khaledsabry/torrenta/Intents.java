@@ -10,6 +10,7 @@ import android.os.Parcelable;
 import java.util.ArrayList;
 import java.util.List;
 
+//create chooser function is important so that if there is no any activity to serve the intent the app doesn't crash
 public class Intents {
     private static final Intents ourInstance = new Intents();
 
@@ -24,20 +25,21 @@ public class Intents {
     //to share the magnet link with your friend on any app
     public void shareMagnetLink(String magnet)
     {
-        Intent intent = new Intent(Intent.ACTION_VIEW);
-        intent.setData(Uri.parse(magnet));
-        MainActivity.getActivity().startActivity(Intent.createChooser(intent, "send to"));
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("text/plain");
+        intent.putExtra(Intent.EXTRA_TEXT,magnet);
+        MainActivity.getActivity().startActivity(Intent.createChooser(intent, "Send to"));
 
     }
 
     //pass the magnet link to download through a torrent app
     public void downloadMagnetLink(String magnet)
     {
-        Intent i = new Intent(Intent.ACTION_VIEW);
-        i.addCategory(Intent.CATEGORY_DEFAULT);
-        i.setType("application/x-bittorrent");
-        i.setData(Uri.parse(magnet));
-        Intent intent = generateTorrentIntent(MainActivity.getActivity().getApplicationContext(), i);
+        Intent intent1 = new Intent(Intent.ACTION_VIEW);
+        intent1.addCategory(Intent.CATEGORY_DEFAULT);
+        intent1.setType("application/x-bittorrent");
+        intent1.setData(Uri.parse(magnet));
+        Intent intent = generateTorrentIntent(MainActivity.getActivity().getApplicationContext(), intent1);
 
         MainActivity.getActivity().startActivity(Intent.createChooser(intent, "send to"));
     }
